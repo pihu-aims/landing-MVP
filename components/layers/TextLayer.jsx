@@ -27,7 +27,7 @@ export default function TextLayer() {
       bgColor: "bg-transparent",
       // bgColor: "bg-[#4e5b4b]",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
     {
       id: "what-we-built",
@@ -38,7 +38,7 @@ export default function TextLayer() {
       // bgColor: "bg-[#4e5b4b]",
       bgColor: "bg-transparent",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
     {
       id: "who-its-for",
@@ -49,7 +49,7 @@ export default function TextLayer() {
       // bgColor: "bg-gradient-to-b from-[#e84393] to-[#0984e3]",
       bgColor: "bg-transparent",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
     {
       id: "who-we-are",
@@ -60,12 +60,12 @@ export default function TextLayer() {
       // bgColor: "bg-gradient-to-b from-[#0984e3] to-[#00cec9]",
       bgColor: "bg-transparent",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full flex flex-col justify-between py-20">
       {/* Header Navigation */}
       <header className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-50 bg-transparent pointer-events-auto">
         {/* Logo */}
@@ -112,7 +112,8 @@ export default function TextLayer() {
           className={`w-full ${section.height} ${section.bgColor} relative flex items-center`}
           style={{
             paddingTop: index === 0 ? "6rem" : "2rem",
-            paddingBottom: "2rem"
+            // TODO: May have to adjust this
+            paddingBottom: "24rem"
           }}
         >
           <div className="container mx-auto px-8">

@@ -16,7 +16,7 @@ export default function Home() {
       {/* Content Container - will scroll over the background layers */}
       <div className="absolute top-0 left-0 z-10 w-full h-screen">
         {/* Images Layer */}
-        <div className="absolute inset-0">
+        <div className="relative inset-0">
           <ImagesLayer />
         </div>
 

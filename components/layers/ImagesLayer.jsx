@@ -38,8 +38,8 @@ const imageData = [
 
 export default function ImagesLayer() {
   return (
-    <div className="bg-transparent flex flex-row justify-center w-full z-20 pointer-events-none">
-      <div className="w-[1440px] h-[4096px] relative">
+    <div className="bg-transparent flex flex-row justify-center w-full h-full z-20 pointer-events-none">
+      <div className="w-[1440px] h-full relative">
         {imageData.map((image) => (
           <img
             key={image.id}
