@@ -68,9 +68,10 @@ export default function TextLayer() {
     <div className="w-full h-full flex flex-col justify-between py-20 ">
       {/* Header Navigation */}
       {/*Made the header background black at 50% transparency*/}
-      <header className="fixed top-0 left-0
+      <header className="topbar fixed top-0 left-0
       w-full flex justify-between items-center px-8 py-4 z-50 bg-black/50
       pointer-events-auto">
+
         {/* Logo */}
         <div className="flex items-center ">
           <img
