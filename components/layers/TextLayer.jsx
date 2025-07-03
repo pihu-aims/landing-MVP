@@ -1,0 +1,142 @@
+"use client";
+
+import React from "react";
+import { Button } from "../ui/button";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+
+export default function TextLayer() {
+  // Navigation menu items
+  const navItems = [
+    { name: "Home", active: true },
+    { name: "About us", active: false },
+    { name: "Works", active: false },
+    { name: "Blog", active: false },
+    { name: "Contact", active: false },
+    { name: "Pricing", active: false },
+  ];
+
+  // Content sections data
+  const contentSections = [
+    {
+      id: "studio1",
+      title: "Studio1",
+      subtitle: "Create Together",
+      heading: "Our Vision: Empowering the Next Billion Storytellers",
+      description:
+        "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
+      bgColor: "bg-[#4e5b4b]",
+      textColor: "text-white",
+      height: "min-h-screen",
+    },
+    {
+      id: "what-we-built",
+      title: "What We've Built",
+      subtitle: "All the Best Creative AI Tools. One Place.",
+      description:
+        "We combine the best creative AI tools in one easy workspace.\nMake content, collaborate, monetize, and stay safe.\nAll in one place, with one subscription.",
+      bgColor: "bg-[#4e5b4b]",
+      textColor: "text-white",
+      height: "min-h-screen",
+    },
+    {
+      id: "who-its-for",
+      title: "Who It's For",
+      subtitle: "Studio1 is for Everyone Ready to Create",
+      description:
+        "We built this for filmmakers, students, influencers, designers and\nanyone with a story to tell.\nNo code needed. Just your ideas and our tools.",
+      bgColor: "bg-gradient-to-b from-[#e84393] to-[#0984e3]",
+      textColor: "text-white",
+      height: "min-h-screen",
+    },
+    {
+      id: "who-we-are",
+      title: "Who We Are",
+      subtitle: "Creative Vision Meets Technical Firepower",
+      description:
+        "We're a team of BAFTA-winning creators, AI experts, and proven operators.\nWe know how to build, ship and scale creative tech.",
+      bgColor: "bg-gradient-to-b from-[#0984e3] to-[#00cec9]",
+      textColor: "text-white",
+      height: "min-h-screen",
+    },
+  ];
+
+  return (
+    <div className="w-full">
+      {/* Header Navigation */}
+      <header className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-50 bg-transparent pointer-events-auto">
+        {/* Logo */}
+        <div className="flex items-center">
+          <img
+            className="w-8 h-8 mr-2"
+            alt="Studio1 Logo"
+            src="/images/a.png"
+          />
+          <span className="text-white font-bold">Studio 1</span>
+        </div>
+
+        {/* Navigation Tabs */}
+        <Tabs defaultValue="Home" className="w-auto">
+          <TabsList className="flex bg-transparent">
+            {navItems.map((item) => (
+              <TabsTrigger
+                key={item.name}
+                value={item.name}
+                className={`text-white px-4 ${
+                  item.active ? "border-b-2 border-white" : ""
+                }`}
+              >
+                {item.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+
+        {/* CTA Button */}
+        <Button
+          variant="outline"
+          className="bg-white text-[#4c5848] px-4 py-2 rounded-md"
+        >
+          Get Started
+        </Button>
+      </header>
+
+      {/* Content Sections */}
+      {contentSections.map((section, index) => (
+        <section
+          key={section.id}
+          id={section.id}
+          className={`w-full ${section.height} ${section.bgColor} relative flex items-center`}
+          style={{
+            paddingTop: index === 0 ? "6rem" : "2rem",
+            paddingBottom: "2rem"
+          }}
+        >
+          <div className="container mx-auto px-8">
+            <div className={`max-w-2xl ${index % 2 !== 0 ? "ml-auto" : ""}`}>
+              <h2 className={`text-5xl font-bold mb-4 ${section.textColor}`}>
+                {section.title}
+              </h2>
+              <h3 className={`text-3xl font-bold mb-6 ${section.textColor}`}>
+                {section.subtitle}
+              </h3>
+              {index === 0 ? (
+                <>
+                  <p className={`text-xl whitespace-pre-line ${section.textColor}`}>
+                    {section.heading}
+                  </p>
+                  <p className={`text-xl mt-6 whitespace-pre-line ${section.textColor}`}>
+                    {section.description}
+                  </p>
+                </>
+              ) : (
+                <p className={`text-xl whitespace-pre-line ${section.textColor}`}>
+                  {section.description}
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}

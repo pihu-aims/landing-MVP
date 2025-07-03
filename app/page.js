@@ -1,27 +1,28 @@
 // app/page.js
 import ImagesLayer from '../components/layers/ImagesLayer';
+import TextLayer from '../components/layers/TextLayer';
 
 export default function Home() {
   return (
-    <div className="bg-black min-h-screen flex justify-center relative">
-      {/* Background Layer */}
-      <div className="w-[1509px] h-[4096px] relative">
-        <div className="absolute w-[1440px] h-[1394px] rounded-lg border shadow-sm">
-          <div className="p-0">
-            <div style={{ position: 'relative', width: '100%', paddingBottom: `${(1394/1440)*100}%` }}>
-              <img
-                className="absolute w-full h-full object-cover"
-                alt="Thumbnail background"
-                src="/images/thumbnail-3-3.png"
-                loading="eager"
-              />
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen w-full">
+      {/* First section background - only covers first section */}
+      <div className="fixed top-0 left-0 w-full h-screen z-0">
+        <img
+          className="w-full h-full object-cover"
+          alt="Thumbnail background"
+          src="/images/thumbnail-3-3.png"
+          loading="eager"
+        />
       </div>
       
-      {/* Images Layer */}
-      <ImagesLayer />
+      {/* Content Container - will scroll over the fixed background */}
+      <div className="relative z-10 w-full">
+        {/* Images Layer */}
+        <ImagesLayer />
+        
+        {/* Text Layer */}
+        <TextLayer />
+      </div>
     </div>
   );
 }
