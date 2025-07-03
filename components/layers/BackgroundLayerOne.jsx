@@ -1,7 +1,10 @@
-// app/page.js
-export default function Home() {
+"use client";
+
+import React from "react";
+
+export default function BackgroundLayerOne() {
   return (
-    <div className="bg-black min-h-screen flex justify-center">
+    <div className="bg-transparent flex justify-center w-full h-full">
       <div className="w-[1509px] h-[4096px] relative">
         <div className="absolute w-[1440px] h-[1394px] rounded-lg border shadow-sm">
           <div className="p-0">
