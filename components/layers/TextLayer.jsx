@@ -65,17 +65,20 @@ export default function TextLayer() {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col justify-between py-20">
+    <div className="w-full h-full flex flex-col justify-between py-20 ">
       {/* Header Navigation */}
-      <header className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-50 bg-transparent pointer-events-auto">
+      {/*Made the header background black at 50% transparency*/}
+      <header className="fixed top-0 left-0
+      w-full flex justify-between items-center px-8 py-4 z-50 bg-black/50
+      pointer-events-auto">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <img
             className="w-8 h-8 mr-2"
             alt="Studio1 Logo"
             src="/images/a.png"
           />
-          <span className="text-white font-bold">Studio 1</span>
+          <span className="text-white font-bold">Studio1.ai</span>
         </div>
 
         {/* Navigation Tabs */}
@@ -86,7 +89,7 @@ export default function TextLayer() {
                 key={item.name}
                 value={item.name}
                 className={`text-white px-4 ${
-                  item.active ? "border-b-2 border-white" : ""
+                  item.active ? "border-b-2 border-white font-bold" : ""
                 }`}
               >
                 {item.name}
@@ -98,13 +101,14 @@ export default function TextLayer() {
         {/* CTA Button */}
         <Button
           variant="outline"
-          className="bg-white text-[#4c5848] px-4 py-2 rounded-md"
+          className="bg-white text-black/75 px-4 py-2 rounded-md"
         >
           Get Started
         </Button>
       </header>
 
       {/* Content Sections */}
+      {/*TODO: We may need to manually place these*/}
       {contentSections.map((section, index) => (
         <section
           key={section.id}
