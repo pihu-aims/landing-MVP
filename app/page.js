@@ -2,6 +2,7 @@
 
 // app/page.js
 // app/page.js
+import TopBar from '../components/layers/Topbar';
 import ImagesLayer from '../components/layers/ImagesLayer';
 import TextLayer from '../components/layers/TextLayer';
 import BackgroundLayerOne from '../components/layers/BackgroundLayerOne';
@@ -23,6 +24,9 @@ export default function Home() {
         <BackgroundLayerOne />
         <BackgroundLayerTwo />
       </div>
+
+        {/*TopBar so it's fixed*/}
+        <TopBar />
 
       {/* Content Layers - scroll at 1x speed */}
       <div
