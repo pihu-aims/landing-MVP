@@ -1,7 +1,10 @@
 // app/page.js
+import ImagesLayer from '../components/layers/ImagesLayer';
+
 export default function Home() {
   return (
-    <div className="bg-black min-h-screen flex justify-center">
+    <div className="bg-black min-h-screen flex justify-center relative">
+      {/* Background Layer */}
       <div className="w-[1509px] h-[4096px] relative">
         <div className="absolute w-[1440px] h-[1394px] rounded-lg border shadow-sm">
           <div className="p-0">
@@ -16,6 +19,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
+      {/* Images Layer */}
+      <ImagesLayer />
     </div>
   );
 }
