@@ -24,7 +24,8 @@ export default function TextLayer() {
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
         "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
-      bgColor: "bg-[#4e5b4b]",
+      bgColor: "bg-transparent",
+      // bgColor: "bg-[#4e5b4b]",
       textColor: "text-white",
       height: "min-h-screen",
     },
@@ -34,7 +35,8 @@ export default function TextLayer() {
       subtitle: "All the Best Creative AI Tools. One Place.",
       description:
         "We combine the best creative AI tools in one easy workspace.\nMake content, collaborate, monetize, and stay safe.\nAll in one place, with one subscription.",
-      bgColor: "bg-[#4e5b4b]",
+      // bgColor: "bg-[#4e5b4b]",
+      bgColor: "bg-transparent",
       textColor: "text-white",
       height: "min-h-screen",
     },
@@ -44,7 +46,8 @@ export default function TextLayer() {
       subtitle: "Studio1 is for Everyone Ready to Create",
       description:
         "We built this for filmmakers, students, influencers, designers and\nanyone with a story to tell.\nNo code needed. Just your ideas and our tools.",
-      bgColor: "bg-gradient-to-b from-[#e84393] to-[#0984e3]",
+      // bgColor: "bg-gradient-to-b from-[#e84393] to-[#0984e3]",
+      bgColor: "bg-transparent",
       textColor: "text-white",
       height: "min-h-screen",
     },
@@ -54,7 +57,8 @@ export default function TextLayer() {
       subtitle: "Creative Vision Meets Technical Firepower",
       description:
         "We're a team of BAFTA-winning creators, AI experts, and proven operators.\nWe know how to build, ship and scale creative tech.",
-      bgColor: "bg-gradient-to-b from-[#0984e3] to-[#00cec9]",
+      // bgColor: "bg-gradient-to-b from-[#0984e3] to-[#00cec9]",
+      bgColor: "bg-transparent",
       textColor: "text-white",
       height: "min-h-screen",
     },

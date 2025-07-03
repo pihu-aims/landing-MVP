@@ -19,7 +19,7 @@ export default function Home() {
       <div className="relative z-10 w-full">
         {/* Images Layer */}
         <ImagesLayer />
-        
+
         {/* Text Layer */}
         <TextLayer />
       </div>
