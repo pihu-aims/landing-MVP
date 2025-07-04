@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function useFrameScrollAnimation(options = {}) {
   const {
-    framePositionMultipliers = [0, 1, 2, 3, 4, 5], // Default: frames at 0, 1x, 2x, 3x, 4x, and 5x viewport height
+    framePositionMultipliers = [0, 1, 2, 3, 4, 5, 6], // Default: frames at 0, 1x, 2x, 3x, 4x, 5x, and 6x viewport height
     useIntersectionObserver = true, // Whether to use IntersectionObserver for more reliable frame detection
     transitionDelay = 600, // Delay in ms for frame transition effect
     scrollPauseDelay = 0, // Set to 0 to disable scroll pausing

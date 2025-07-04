@@ -13,10 +13,10 @@ import ExpandingCircleLayer from "@/components/layers/ExpandingCircleLayer";
 
 export default function Home() {
     const { scrollY, currentFrame, isFrameTransition, transitionProgress } = useFrameScrollAnimation();
-    const [contentHeight, setContentHeight] = useState('600vh'); // For 6 frames
+    const [contentHeight, setContentHeight] = useState('700vh'); // For 7 frames
 
     useEffect(() => {
-        setContentHeight(`600vh`); // Adjust height if frames change
+        setContentHeight(`700vh`); // Adjust height if frames change
     }, []);
 
     const textOffset = currentFrame * 100; // Each frame = 100vh apart

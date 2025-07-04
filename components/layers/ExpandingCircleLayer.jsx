@@ -1,7 +1,8 @@
 import React from 'react';
 
 const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgress }) => {
-  const isActive = currentFrame === 5; // This layer is active on the 6th frame (index 5)
+  //   This logic is currently shaky, had to add a 7th frame to make sure the transition completes
+  const isActive = currentFrame === 5 || currentFrame === 6; // This layer is active on the 6th frame (index 5)
 
   let scale = 0;
   let opacity = 0;
