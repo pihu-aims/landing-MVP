@@ -1,7 +1,7 @@
 "use client";
 
 // components/SocialProof.jsx
-import { useState, useEffect } from 'react'
+import { motion } from '@/node_modules/framer-motion/dist/framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 export default function SocialProof() {
@@ -9,13 +9,6 @@ export default function SocialProof() {
     threshold: 0.1,
     triggerOnce: true
   })
-  const [isVisible, setIsVisible] = useState(false)
-  
-  useEffect(() => {
-    if (inView) {
-      setIsVisible(true)
-    }
-  }, [inView])
 
   const stats = [
     { number: "2.3M+", label: "Videos Created", desc: "Monthly content produced" },
@@ -27,21 +20,22 @@ export default function SocialProof() {
   return (
     <section className="py-20 bg-black/20" ref={ref}>
       <div className="max-w-6xl mx-auto px-4">
-        <h2
-          className={`text-4xl font-bold text-center mb-16 text-cyan-400 transition-all duration-600 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-4xl font-bold text-center mb-16 text-cyan-400"
         >
           Proven traction across industries
-        </h2>
+        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`text-center p-6 bg-white/5 rounded-lg border border-cyan-500/20 transition-all duration-600 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="text-center p-6 bg-white/5 rounded-lg border border-cyan-500/20"
             >
               <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-2">
                 {stat.number}
@@ -52,7 +46,7 @@ export default function SocialProof() {
               <div className="text-sm text-gray-400">
                 {stat.desc}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
