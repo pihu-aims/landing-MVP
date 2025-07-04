@@ -108,18 +108,18 @@ export default function TextLayer() {
   return (
     <div className="w-full h-full">
       {/* Navigation buttons for frame navigation */}
-      <div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">
-        {contentSections.map((_, index) => (
-          <button
-            key={`nav-${index}`}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              currentFrame === index ? 'bg-white scale-125' : 'bg-gray-400 hover:bg-gray-200'
-            }`}
-            onClick={() => handleFrameNavigation(index)}
-            aria-label={`Navigate to frame ${index + 1}`}
-          />
-        ))}
-      </div>
+      {/*<div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">*/}
+      {/*  {contentSections.map((_, index) => (*/}
+      {/*    <button*/}
+      {/*      key={`nav-${index}`}*/}
+      {/*      className={`w-3 h-3 rounded-full transition-all duration-300 ${*/}
+      {/*        currentFrame === index ? 'bg-white scale-125' : 'bg-gray-400 hover:bg-gray-200'*/}
+      {/*      }`}*/}
+      {/*      onClick={() => handleFrameNavigation(index)}*/}
+      {/*      aria-label={`Navigate to frame ${index + 1}`}*/}
+      {/*    />*/}
+      {/*  ))}*/}
+      {/*</div>*/}
 
       {/* Content Sections */}
       {contentSections.map((section, index) => (

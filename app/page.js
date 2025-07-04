@@ -2,6 +2,8 @@
 
 // app/page.js
 import TopBar from '../components/layers/Topbar';
+import ButtonLayer from "../components/layers/ButtonLayer"
+
 // import ImagesLayer from '../components/layers/ImagesLayer';
 import TextLayer from '../components/layers/TextLayer';
 import BackgroundLayerOne from '../components/layers/BackgroundLayerOne';
@@ -40,6 +42,7 @@ export default function Home() {
         <TopBar />
       </div>
 
+        <ButtonLayer />
       {/* Images Layer - COMMENTED OUT
       <div
         className="fixed top-0 left-0 w-full h-full z-10"
@@ -52,9 +55,10 @@ export default function Home() {
       </div>
       */}
 
+
       {/* Text Layer - scroll at 1x speed */}
       <div
-        className="absolute top-0 left-0 w-full z-20"
+        className="fixed top-0 left-0 w-full z-20"
         style={{
           transform: `translateY(${-scrollY * 1}px)`,
           transition: isFrameTransition ? 'transform 0.6s ease-out' : 'transform 0.2s linear',
