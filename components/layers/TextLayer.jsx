@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import TopBar from './Topbar';
 
 export default function TextLayer() {
   // Navigation menu items
@@ -24,9 +25,10 @@ export default function TextLayer() {
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
         "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
-      bgColor: "bg-[#4e5b4b]",
+      bgColor: "bg-transparent",
+      // bgColor: "bg-[#4e5b4b]",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
     {
       id: "what-we-built",
@@ -34,9 +36,10 @@ export default function TextLayer() {
       subtitle: "All the Best Creative AI Tools. One Place.",
       description:
         "We combine the best creative AI tools in one easy workspace.\nMake content, collaborate, monetize, and stay safe.\nAll in one place, with one subscription.",
-      bgColor: "bg-[#4e5b4b]",
+      // bgColor: "bg-[#4e5b4b]",
+      bgColor: "bg-transparent",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
     {
       id: "who-its-for",
@@ -44,9 +47,10 @@ export default function TextLayer() {
       subtitle: "Studio1 is for Everyone Ready to Create",
       description:
         "We built this for filmmakers, students, influencers, designers and\nanyone with a story to tell.\nNo code needed. Just your ideas and our tools.",
-      bgColor: "bg-gradient-to-b from-[#e84393] to-[#0984e3]",
+      // bgColor: "bg-gradient-to-b from-[#e84393] to-[#0984e3]",
+      bgColor: "bg-transparent",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
     {
       id: "who-we-are",
@@ -54,53 +58,17 @@ export default function TextLayer() {
       subtitle: "Creative Vision Meets Technical Firepower",
       description:
         "We're a team of BAFTA-winning creators, AI experts, and proven operators.\nWe know how to build, ship and scale creative tech.",
-      bgColor: "bg-gradient-to-b from-[#0984e3] to-[#00cec9]",
+      // bgColor: "bg-gradient-to-b from-[#0984e3] to-[#00cec9]",
+      bgColor: "bg-transparent",
       textColor: "text-white",
-      height: "min-h-screen",
+      height: "h-auto",
     },
   ];
 
   return (
-    <div className="w-full">
-      {/* Header Navigation */}
-      <header className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-50 bg-transparent pointer-events-auto">
-        {/* Logo */}
-        <div className="flex items-center">
-          <img
-            className="w-8 h-8 mr-2"
-            alt="Studio1 Logo"
-            src="/images/a.png"
-          />
-          <span className="text-white font-bold">Studio 1</span>
-        </div>
-
-        {/* Navigation Tabs */}
-        <Tabs defaultValue="Home" className="w-auto">
-          <TabsList className="flex bg-transparent">
-            {navItems.map((item) => (
-              <TabsTrigger
-                key={item.name}
-                value={item.name}
-                className={`text-white px-4 ${
-                  item.active ? "border-b-2 border-white" : ""
-                }`}
-              >
-                {item.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
-
-        {/* CTA Button */}
-        <Button
-          variant="outline"
-          className="bg-white text-[#4c5848] px-4 py-2 rounded-md"
-        >
-          Get Started
-        </Button>
-      </header>
-
+    <div className="w-full h-full flex flex-col justify-between py-20 ">
       {/* Content Sections */}
+      {/*TODO: We may need to manually place these*/}
       {contentSections.map((section, index) => (
         <section
           key={section.id}
@@ -108,7 +76,8 @@ export default function TextLayer() {
           className={`w-full ${section.height} ${section.bgColor} relative flex items-center`}
           style={{
             paddingTop: index === 0 ? "6rem" : "2rem",
-            paddingBottom: "2rem"
+            // TODO: May have to adjust this
+            paddingBottom: "24rem"
           }}
         >
           <div className="container mx-auto px-8">
