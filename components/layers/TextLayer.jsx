@@ -9,13 +9,13 @@ import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 export default function TextLayer() {
   const [isClient, setIsClient] = useState(false);
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 1, 2, 3], // Default: frames at 0, 1x, 2x, and 3x viewport height
+    framePositionMultipliers: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
     useIntersectionObserver: true,
-    transitionDelay: 600,
-    scrollPauseDelay: 400,
-    minTimeBetweenTransitions: 500,
-    enableSnapToFrame: true,
-    scrollSnapThreshold: 0.3
+    transitionDelay: 300,
+    scrollPauseDelay: 0, // Disable scroll pausing to fix scrolling issues
+    minTimeBetweenTransitions: 300,
+    enableSnapToFrame: false, // Disable automatic snap to allow normal scrolling
+    scrollSnapThreshold: 0.9
   });
 
   // Navigation menu items
@@ -93,7 +93,7 @@ export default function TextLayer() {
     const viewportHeight = window.innerHeight;
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 2, 3] // One multiplier for each content section
+      framePositionMultipliers: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30] // One multiplier for each content section
     }));
   }, []);
 
@@ -109,7 +109,7 @@ export default function TextLayer() {
     <div className="w-full h-full">
       {/* Navigation buttons for frame navigation */}
       <div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">
-        {contentSections.map((_, index) => (
+        {frameConfig.framePositionMultipliers.map((_, index) => (
           <button
             key={`nav-${index}`}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
@@ -190,7 +190,7 @@ export default function TextLayer() {
 
       {/* Spacer divs for scroll snapping - these create the scrollable area */}
       <div className="relative">
-        {contentSections.map((_, index) => (
+        {Array(11).fill(null).map((_, index) => (
           <div 
             key={`spacer-${index}`} 
             className="w-full h-screen"
