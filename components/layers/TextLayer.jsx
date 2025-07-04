@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TopBar from './Topbar';
 import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 
 export default function TextLayer() {
-  const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false)
+  const prevFrame = useRef(null); // store previous frame index
+
   const [frameConfig, setFrameConfig] = useState({
     framePositionMultipliers: [0, 1, 2, 3], // Default: frames at 0, 1x, 2x, and 3x viewport height
     useIntersectionObserver: true,
@@ -77,49 +79,53 @@ export default function TextLayer() {
     },
   ];
 
-  const { 
-    currentFrame, 
-    registerFrame, 
-    isFrameTransition, 
+  const {
+    currentFrame,
+    registerFrame,
+    isFrameTransition,
     scrollToFrame,
-    transitionProgress 
+    transitionProgress
   } = useFrameScrollAnimation(frameConfig);
 
-  // Set isClient to true when component mounts to avoid hydration errors
   useEffect(() => {
     setIsClient(true);
-    
-    // Update frame config based on viewport height
-    const viewportHeight = window.innerHeight;
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 2, 3] // One multiplier for each content section
+      framePositionMultipliers: [0, 1, 2, 3]
     }));
   }, []);
 
-  // Function to handle navigation to a specific frame
+  // Handle navigation
   const handleFrameNavigation = (index) => {
     scrollToFrame(index);
   };
 
-  // Only render on client side to avoid hydration mismatch
+  // 🔥 Auto trigger when scroll crosses into a new frame
+  useEffect(() => {
+    if (prevFrame.current !== null && prevFrame.current !== currentFrame) {
+      console.log(`Scroll reached frame ${currentFrame}`);
+      handleFrameNavigation(currentFrame); // simulate button click
+    }
+    prevFrame.current = currentFrame;
+  }, [currentFrame]); // runs every time scroll updates currentFrame
+
   if (!isClient) return null;
 
   return (
     <div className="w-full h-full">
       {/* Navigation buttons for frame navigation */}
-      {/*<div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">*/}
-      {/*  {contentSections.map((_, index) => (*/}
-      {/*    <button*/}
-      {/*      key={`nav-${index}`}*/}
-      {/*      className={`w-3 h-3 rounded-full transition-all duration-300 ${*/}
-      {/*        currentFrame === index ? 'bg-white scale-125' : 'bg-gray-400 hover:bg-gray-200'*/}
-      {/*      }`}*/}
-      {/*      onClick={() => handleFrameNavigation(index)}*/}
-      {/*      aria-label={`Navigate to frame ${index + 1}`}*/}
-      {/*    />*/}
-      {/*  ))}*/}
-      {/*</div>*/}
+      <div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">
+        {contentSections.map((_, index) => (
+          <button
+            key={`nav-${index}`}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              currentFrame === index ? 'bg-white scale-125' : 'bg-gray-400 hover:bg-gray-200'
+            }`}
+            onClick={() => handleFrameNavigation(index)}
+            aria-label={`Navigate to frame ${index + 1}`}
+          />
+        ))}
+      </div>
 
       {/* Content Sections */}
       {contentSections.map((section, index) => (
@@ -130,7 +136,7 @@ export default function TextLayer() {
           className={`w-full ${section.height} ${section.bgColor} relative flex items-center`}
         >
           <div className="container mx-auto px-8 h-full flex items-center">
-            <div 
+            <div
               className={`max-w-2xl ${section.imagePosition === 'right' ? '' : 'ml-auto'}`}
               style={{
                 opacity: Math.abs(currentFrame - index) <= 1 ? 1 - Math.abs(currentFrame - index) * 0.3 : 0.4,
@@ -138,7 +144,7 @@ export default function TextLayer() {
                 transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
               }}
             >
-              <h2 
+              <h2
                 className={`text-5xl font-bold mb-4 ${section.textColor}`}
                 style={{
                   transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
@@ -146,7 +152,7 @@ export default function TextLayer() {
               >
                 {section.title}
               </h2>
-              <h3 
+              <h3
                 className={`text-3xl font-bold mb-6 ${section.textColor}`}
                 style={{
                   transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
@@ -156,7 +162,7 @@ export default function TextLayer() {
               </h3>
               {index === 0 ? (
                 <>
-                  <p 
+                  <p
                     className={`text-xl whitespace-pre-line ${section.textColor}`}
                     style={{
                       transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
@@ -164,7 +170,7 @@ export default function TextLayer() {
                   >
                     {section.heading}
                   </p>
-                  <p 
+                  <p
                     className={`text-xl mt-6 whitespace-pre-line ${section.textColor}`}
                     style={{
                       transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
@@ -174,7 +180,7 @@ export default function TextLayer() {
                   </p>
                 </>
               ) : (
-                <p 
+                <p
                   className={`text-xl whitespace-pre-line ${section.textColor}`}
                   style={{
                     transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
@@ -191,8 +197,8 @@ export default function TextLayer() {
       {/* Spacer divs for scroll snapping - these create the scrollable area */}
       <div className="relative">
         {contentSections.map((_, index) => (
-          <div 
-            key={`spacer-${index}`} 
+          <div
+            key={`spacer-${index}`}
             className="w-full h-screen"
             style={{ visibility: 'hidden' }}
           />
