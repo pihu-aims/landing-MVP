@@ -1,50 +1,47 @@
 "use client";
 
-// app/page.js
-// app/page.js
+import useScrollAnimation from '../hooks/useScrollAnimation';
 import TopBar from '../components/layers/Topbar';
-import ImagesLayer from '../components/layers/ImagesLayer';
-import TextLayer from '../components/layers/TextLayer';
 import BackgroundLayerOne from '../components/layers/BackgroundLayerOne';
 import BackgroundLayerTwo from '../components/layers/BackgroundLayerTwo';
-import useScrollAnimation from '../hooks/useScrollAnimation';
+import ImagesLayer from '../components/layers/ImagesLayer';
+import TextLayer from '../components/layers/TextLayer';
+import { useEffect } from 'react';
 
 export default function Home() {
-  const scrollY = useScrollAnimation();
+    const scrollY = useScrollAnimation();
 
-  return (
-    <div className="relative w-full">
-      {/* Background Layers - scroll at 0.5x speed */}
-      <div
-        className="absolute top-0 left-0 w-full h-full z-0"
-        style={{
-          transform: `translateY(${-scrollY * 0.5}px)`
-        }}
-      >
-        <BackgroundLayerOne />
-        <BackgroundLayerTwo />
-      </div>
+    // Log scrollY whenever it updates
+    useEffect(() => {
+        console.log('scrollY:', scrollY);
+    }, [scrollY]);
 
-        {/*TopBar so it's fixed*/}
-        <TopBar />
+    return (
+        <div className="relative w-full h-[calc(var(--bg-total-height))]">
+            {/* Scrollable Background (parallax effect) */}
+            <div
+                className="absolute top-0 left-0 w-full h-full z-0"
+                style={{ transform: `translateY(${-scrollY * 0.5}px)` }} // slower background movement
+            >
+                <BackgroundLayerOne />
+                <BackgroundLayerTwo />
+            </div>
 
-      {/* Content Layers - scroll at 1x speed */}
-      <div
-        className="absolute top-0 left-0 w-full h-full z-10"
-        style={{
-          transform: `translateY(${-scrollY * 1}px)`
-        }}
-      >
-        {/* Images Layer */}
-        <div className="absolute inset-0">
-          <ImagesLayer />
+            {/* Fixed TopBar – always stays at top */}
+            <TopBar />
+
+            {/* Scrollable Content Layers */}
+            <div
+                className="absolute top-0 left-0 w-full h-full z-10"
+                style={{ transform: `translateY(${-scrollY}px)` }} // scrolls at normal speed
+            >
+                <div className="absolute inset-0">
+                    <ImagesLayer />
+                </div>
+                <div className="absolute inset-0">
+                    <TextLayer />
+                </div>
+            </div>
         </div>
-
-        {/* Text Layer */}
-        <div className="absolute inset-0">
-          <TextLayer />
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
