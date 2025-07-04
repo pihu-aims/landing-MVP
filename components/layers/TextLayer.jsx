@@ -15,7 +15,7 @@ export default function TextLayer() {
 
 
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 1, 2, 3], // Default: frames at 0, 1x, 2x, and 3x viewport height
+    framePositionMultipliers: [0, 1, 2, 3,4,5], // Default: frames at 0, 1x, 2x, and 3x viewport height
     useIntersectionObserver: true,
     transitionDelay: 600,
     scrollPauseDelay: 400,
@@ -95,7 +95,7 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 2, 3]
+      framePositionMultipliers: [0, 1, 2, 3,4,5]
     }));
   }, []);
 
@@ -121,6 +121,10 @@ export default function TextLayer() {
   }, [currentFrame]); // runs every time scroll updates currentFrame
 
   if (!isClient) return null;
+
+  // Style strings for reusability
+  const frameTransitionAnimationTrue = 'all 0.5s ease-out';
+  const frameTranstionAnimationFalse = 'all 0.2s';
 
   return (
       <div className="w-full h-full">
@@ -152,13 +156,13 @@ export default function TextLayer() {
                     style={{
                       opacity: Math.abs(currentFrame - index) <= 1 ? 1 - Math.abs(currentFrame - index) * 0.3 : 0.4,
                       transform: `translateY(${isFrameTransition && currentFrame === index ? '5px' : '0px'})`,
-                      transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
+                      transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                     }}
                 >
                   <h2
                       className={`text-5xl font-bold mb-4 ${section.textColor}`}
                       style={{
-                        transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
+                        transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                       }}
                   >
                     {section.title}
@@ -166,7 +170,7 @@ export default function TextLayer() {
                   <h3
                       className={`text-3xl font-bold mb-6 ${section.textColor}`}
                       style={{
-                        transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
+                        transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                       }}
                   >
                     {section.subtitle}
@@ -176,7 +180,7 @@ export default function TextLayer() {
                         <p
                             className={`text-xl whitespace-pre-line ${section.textColor}`}
                             style={{
-                              transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                             }}
                         >
                           {section.heading}
@@ -184,7 +188,7 @@ export default function TextLayer() {
                         <p
                             className={`text-xl mt-6 whitespace-pre-line ${section.textColor}`}
                             style={{
-                              transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                             }}
                         >
                           {section.description}
@@ -194,7 +198,7 @@ export default function TextLayer() {
                       <p
                           className={`text-xl whitespace-pre-line ${section.textColor}`}
                           style={{
-                            transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
+                            transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                           }}
                       >
                         {section.description}

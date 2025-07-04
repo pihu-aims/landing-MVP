@@ -27,8 +27,8 @@ export default function Home() {
             <div
                 className="fixed top-0 left-0 w-full h-full z-0"
                 style={{
-                    transform: `translateY(${-scrollY * 0.5}px)`,
-                    transition: isFrameTransition ? 'transform 0.6s ease-out' : 'transform 0.2s linear',
+                    transform: `translateY(-${scrollY * 0.8}px)`,
+                    transition: isFrameTransition ? 'transform 1.6s ease-out' : 'transform 0.2s linear',
                 }}
             >
                 <BackgroundLayerOne />
@@ -46,7 +46,7 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
-                    transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none',
+                    transition: isFrameTransition ? 'transform 1.2s ease-out' : 'none',
                 }}
             >
                 <TextLayer />
@@ -57,7 +57,7 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
-                    transition: isFrameTransition ? 'transform 0.5s ease-out' : 'none',
+                    transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none',
                 }}
             >
                 <ImagesLayer />
