@@ -9,13 +9,14 @@ import BackgroundLayerThree from '../components/layers/BackgroundLayerThree';
 import useFrameScrollAnimation from '../hooks/useFrameScrollAnimation';
 import { useEffect, useState } from 'react';
 import ImagesLayer from "@/components/layers/ImagesLayer";
+import ExpandingCircleLayer from "@/components/layers/ExpandingCircleLayer";
 
 export default function Home() {
-    const { scrollY, currentFrame, isFrameTransition } = useFrameScrollAnimation();
-    const [contentHeight, setContentHeight] = useState('500vh'); // For 5 frames
+    const { scrollY, currentFrame, isFrameTransition, transitionProgress } = useFrameScrollAnimation();
+    const [contentHeight, setContentHeight] = useState('600vh'); // For 6 frames
 
     useEffect(() => {
-        setContentHeight(`500vh`); // Adjust height if frames change
+        setContentHeight(`600vh`); // Adjust height if frames change
     }, []);
 
     const textOffset = currentFrame * 100; // Each frame = 100vh apart
@@ -27,7 +28,7 @@ export default function Home() {
             <div
                 className="fixed top-0 left-0 w-full h-full z-0"
                 style={{
-                    transform: `translateY(-${scrollY * 0.5}px)`,
+                    transform: `translateY(-${scrollY * 0.4}px)`,
                     transition: isFrameTransition ? 'transform 1.6s ease-out' : 'transform 0.2s linear',
                 }}
             >
@@ -71,6 +72,11 @@ export default function Home() {
                     Frame {currentFrame + 1}
                 </div>
             )}
+
+            {/* Expanding Circle Layer */}
+
+            {/*FAULTY CODE*/}
+            <ExpandingCircleLayer currentFrame={currentFrame} isFrameTransition={isFrameTransition} transitionProgress={transitionProgress} />
         </div>
     );
 }
