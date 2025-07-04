@@ -8,6 +8,7 @@ import BackgroundLayerTwo from '../components/layers/BackgroundLayerTwo';
 import BackgroundLayerThree from '../components/layers/BackgroundLayerThree';
 import useFrameScrollAnimation from '../hooks/useFrameScrollAnimation';
 import { useEffect, useState } from 'react';
+import ImagesLayer from "@/components/layers/ImagesLayer";
 
 export default function Home() {
     const { scrollY, currentFrame, isFrameTransition } = useFrameScrollAnimation();
@@ -45,13 +46,26 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
-                    transition: isFrameTransition ? 'transform 0.6s ease-out' : 'none',
+                    transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none',
                 }}
             >
                 <TextLayer />
             </div>
 
+            {/* Text Layer - frame based, no scroll dependency */}
+            <div
+                className="fixed top-0 left-0 w-full z-20"
+                style={{
+                    transform: `translateY(-${textOffset}vh)`, // moves by frame only
+                    transition: isFrameTransition ? 'transform 0.5s ease-out' : 'none',
+                }}
+            >
+                <ImagesLayer />
+            </div>
+
+
             {/* Frame indicator (optional) */}
+            {/*Hide in production!!!!!!!!!!!*/}
             {isFrameTransition && (
                 <div className="fixed bottom-8 right-8 bg-black/60 text-white px-4 py-2 rounded-full z-40 transition-opacity duration-300">
                     Frame {currentFrame + 1}
