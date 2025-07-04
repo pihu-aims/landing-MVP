@@ -7,8 +7,10 @@ export default function useFrameScrollAnimation(options = {}) {
     framePositionMultipliers = [0, 1, 2], // Default: frames at 0, 1x, and 2x viewport height
     useIntersectionObserver = true, // Whether to use IntersectionObserver for more reliable frame detection
     transitionDelay = 600, // Delay in ms for frame transition effect
-    scrollPauseDelay = 400, // Delay in ms to pause scrolling during transition
-    minTimeBetweenTransitions = 500 // Minimum time between frame transitions
+    scrollPauseDelay = 0, // Set to 0 to disable scroll pausing
+    minTimeBetweenTransitions = 500, // Minimum time between frame transitions
+    enableSnapToFrame = false, // Disable snap-to-frame by default
+    scrollSnapThreshold = 0.3 // Threshold to determine when to snap (0.3 = 30% of the way to next frame)
   } = options;
   
   const [currentFrame, setCurrentFrame] = useState(0);
@@ -20,6 +22,41 @@ export default function useFrameScrollAnimation(options = {}) {
   const lastFrameChangeTime = useRef(0);
   const transitionTimeoutRef = useRef(null);
   const viewportHeight = useRef(typeof window !== 'undefined' ? window.innerHeight : 0);
+  const isScrolling = useRef(false);
+  const scrollTimeout = useRef(null);
+  const targetFrameRef = useRef(null);
+
+  // Function to smoothly scroll to a specific position
+  const scrollToPosition = (position, duration = 500) => {
+    if (typeof window === 'undefined') return;
+    
+    const start = window.scrollY;
+    const change = position - start;
+    const startTime = performance.now();
+    
+    function animateScroll(currentTime) {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const easeProgress = 0.5 - Math.cos(progress * Math.PI) / 2; // Smooth easing
+      
+      window.scrollTo(0, start + change * easeProgress);
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(animateScroll);
+      }
+    }
+    
+    window.requestAnimationFrame(animateScroll);
+  };
+
+  // Function to scroll to a specific frame
+  const scrollToFrame = (frameIndex) => {
+    if (frameIndex < 0 || frameIndex >= framePositionMultipliers.length) return;
+    
+    const framePosition = Math.round(framePositionMultipliers[frameIndex] * viewportHeight.current);
+    scrollToPosition(framePosition);
+    targetFrameRef.current = frameIndex;
+  };
 
   const registerFrame = (index, element) => {
     if (element) {
@@ -67,14 +104,42 @@ export default function useFrameScrollAnimation(options = {}) {
     transitionTimeoutRef.current = setTimeout(() => {
       setIsFrameTransition(false);
     }, transitionDelay);
+  };
+
+  // Handle snap-to-frame when scrolling stops
+  const handleScrollStop = () => {
+    if (!enableSnapToFrame || isFrameTransition) return;
     
-    if (scrollPauseDelay > 0) {
-      const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
+    isScrolling.current = false;
+    
+    const framePositions = framePositionMultipliers.map(
+      multiplier => Math.round(multiplier * viewportHeight.current)
+    );
+    
+    // Find the closest frame position
+    let closestFrameIndex = 0;
+    let minDistance = Infinity;
+    
+    for (let i = 0; i < framePositions.length; i++) {
+      const distance = Math.abs(scrollY - framePositions[i]);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestFrameIndex = i;
+      }
+    }
+    
+    // If we're between frames and past the threshold, snap to the appropriate frame
+    if (closestFrameIndex < framePositions.length - 1) {
+      const currentFramePos = framePositions[closestFrameIndex];
+      const nextFramePos = framePositions[closestFrameIndex + 1];
+      const progress = (scrollY - currentFramePos) / (nextFramePos - currentFramePos);
       
-      setTimeout(() => {
-        document.body.style.overflow = originalOverflow;
-      }, scrollPauseDelay);
+      if (progress > scrollSnapThreshold && progress < (1 - scrollSnapThreshold)) {
+        // We're in the middle zone between frames, snap to the closest one
+        const targetFrame = progress < 0.5 ? closestFrameIndex : closestFrameIndex + 1;
+        // Don't automatically scroll - just update the frame
+        setCurrentFrame(targetFrame);
+      }
     }
   };
 
@@ -89,6 +154,17 @@ export default function useFrameScrollAnimation(options = {}) {
       const currentScrollY = window.scrollY;
       setScrollY(currentScrollY);
       
+      // Set scrolling state
+      isScrolling.current = true;
+      
+      // Clear any existing scroll timeout
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+      
+      // Set a timeout to detect when scrolling stops
+      scrollTimeout.current = setTimeout(handleScrollStop, 150);
+      
       if (useIntersectionObserver && observersRef.current.length > 0) {
         return;
       }
@@ -99,7 +175,7 @@ export default function useFrameScrollAnimation(options = {}) {
       
       let newFrameIndex = 0;
       for (let i = 0; i < framePositions.length; i++) {
-        if (currentScrollY >= framePositions[i]) {
+        if (currentScrollY >= framePositions[i] - (viewportHeight.current * 0.1)) {
           newFrameIndex = i;
         } else {
           break;
@@ -150,14 +226,19 @@ export default function useFrameScrollAnimation(options = {}) {
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
       }
+      
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
     };
-  }, [currentFrame, framePositionMultipliers, minTimeBetweenTransitions, scrollPauseDelay, transitionDelay, useIntersectionObserver]);
+  }, [currentFrame, framePositionMultipliers, minTimeBetweenTransitions, scrollPauseDelay, transitionDelay, useIntersectionObserver, enableSnapToFrame, scrollSnapThreshold]);
 
   return {
     currentFrame,
     scrollY,
     registerFrame,
     isFrameTransition,
-    transitionProgress
+    transitionProgress,
+    scrollToFrame
   };
 }

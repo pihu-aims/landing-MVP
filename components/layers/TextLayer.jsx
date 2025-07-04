@@ -1,12 +1,23 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TopBar from './Topbar';
 import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 
 export default function TextLayer() {
+  const [isClient, setIsClient] = useState(false);
+  const [frameConfig, setFrameConfig] = useState({
+    framePositionMultipliers: [0, 1, 2, 3], // Default: frames at 0, 1x, 2x, and 3x viewport height
+    useIntersectionObserver: true,
+    transitionDelay: 600,
+    scrollPauseDelay: 400,
+    minTimeBetweenTransitions: 500,
+    enableSnapToFrame: true,
+    scrollSnapThreshold: 0.3
+  });
+
   // Navigation menu items
   const navItems = [
     { name: "Home", active: true },
@@ -66,10 +77,50 @@ export default function TextLayer() {
     },
   ];
 
-  const { currentFrame, registerFrame, isFrameTransition } = useFrameScrollAnimation();
+  const { 
+    currentFrame, 
+    registerFrame, 
+    isFrameTransition, 
+    scrollToFrame,
+    transitionProgress 
+  } = useFrameScrollAnimation(frameConfig);
+
+  // Set isClient to true when component mounts to avoid hydration errors
+  useEffect(() => {
+    setIsClient(true);
+    
+    // Update frame config based on viewport height
+    const viewportHeight = window.innerHeight;
+    setFrameConfig(prev => ({
+      ...prev,
+      framePositionMultipliers: [0, 1, 2, 3] // One multiplier for each content section
+    }));
+  }, []);
+
+  // Function to handle navigation to a specific frame
+  const handleFrameNavigation = (index) => {
+    scrollToFrame(index);
+  };
+
+  // Only render on client side to avoid hydration mismatch
+  if (!isClient) return null;
 
   return (
     <div className="w-full h-full">
+      {/* Navigation buttons for frame navigation */}
+      <div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">
+        {contentSections.map((_, index) => (
+          <button
+            key={`nav-${index}`}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              currentFrame === index ? 'bg-white scale-125' : 'bg-gray-400 hover:bg-gray-200'
+            }`}
+            onClick={() => handleFrameNavigation(index)}
+            aria-label={`Navigate to frame ${index + 1}`}
+          />
+        ))}
+      </div>
+
       {/* Content Sections */}
       {contentSections.map((section, index) => (
         <section
@@ -136,6 +187,17 @@ export default function TextLayer() {
           </div>
         </section>
       ))}
+
+      {/* Spacer divs for scroll snapping - these create the scrollable area */}
+      <div className="relative">
+        {contentSections.map((_, index) => (
+          <div 
+            key={`spacer-${index}`} 
+            className="w-full h-screen"
+            style={{ visibility: 'hidden' }}
+          />
+        ))}
+      </div>
     </div>
   );
 }
