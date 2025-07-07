@@ -49,7 +49,6 @@ export default function TextLayer() {
       headingColor: "text-black",
       descriptionColor: "text-black",
       height: "h-screen",
-      imagePosition: "right", // Image position for this frame
       // Alignment variables
       positionPercentTop: 50,
       positionPercentLeft: 35
@@ -66,7 +65,6 @@ export default function TextLayer() {
       headingColor: "text-white",
       descriptionColor: "text-white",
       height: "h-screen",
-      imagePosition: "left", // Image position for this frame
       // Alignment variables
       positionPercentTop: 65,
       positionPercentLeft: 70,
@@ -84,7 +82,6 @@ export default function TextLayer() {
       headingColor: "text-white",
       descriptionColor: "text-white",
       height: "h-screen",
-      imagePosition: "right", // Image position for this frame
       // Alignment variables
       positionPercentTop: 25,
       positionPercentLeft: 30,
@@ -101,7 +98,6 @@ export default function TextLayer() {
       headingColor: "text-black",
       descriptionColor: "text-black",
       height: "h-screen",
-      imagePosition: "left", // Image position for this frame
       // Alignment variables
       positionPercentTop: 30,
       positionPercentLeft: 70,
@@ -118,7 +114,6 @@ export default function TextLayer() {
       headingColor: "text-white",
       descriptionColor: "text-white",
       height: "h-screen",
-      imagePosition: "right", // Image position for this frame
       // Alignment variables
       positionPercentTop: 50,
       positionPercentLeft: 50,
