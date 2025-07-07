@@ -93,4 +93,5 @@ export default function Home() {
             {/* Waitlist Page - appears after circle transition */}
             <WaitlistPage isVisible={showWaitlist} />
         </div>
-    );
+    );    
+}
