@@ -21,42 +21,47 @@ export default function ImagesLayer() {
       positionPercentLeft: 75, // 90% from left edge
       scale: 1.0,
       width: 400,              // px (optional)
+      frame: 1,
     },
     {
       id: "image-b",
       src: "/images/b.png",
       alt: "Image B - What We've Built",
-      positionPercentTop: 150,
+      positionPercentTop: 50,
       positionPercentLeft: 25,
       scale: 2.5,
       width: 400,
+      frame: 2,
     },
     {
       id: "image-c",
       src: "/images/c.png",
       alt: "Image C - Who It's For",
-      positionPercentTop: 225,
+      positionPercentTop: 25,
       positionPercentLeft: 80,
       scale: 1.5,
       width: 350,
+      frame: 3,
     },
     {
       id: "image-d",
       src: "/images/d.png",
       alt: "Image D - Who We Are",
-      positionPercentTop: 275,
+      positionPercentTop: 75,
       positionPercentLeft: 20,
       scale: 1.5,
       width: 380,
+      frame: 3,
     },
     {
       id: "image-e",
       src: "/images/e.png",
       alt: "Image E - Additional Content",
-      positionPercentTop: 350,
+      positionPercentTop: 50,
       positionPercentLeft: 35,
       scale: 1.25,
       width: 450,
+      frame: 4,
     },
   ];
 
@@ -76,7 +81,8 @@ export default function ImagesLayer() {
                 alt={image.alt}
                 className="absolute object-cover rounded-3xl shadow-lg"
                 style={{
-                  top: `${image.positionPercentTop}vh`,   // Center vertically
+                  top: `${((image.frame - 1) * 100) + image.positionPercentTop}vh`,   // Center vertically
+                  // Also accounts for frame as well and frame index starts at 1
                   left: `${image.positionPercentLeft}vw`, // Center horizontally
                   width: `${image.width}px`,
                   height: 'auto',

@@ -37,7 +37,7 @@ export default function Home() {
             <div
                 className="fixed top-0 left-0 w-full h-full z-0"
                 style={{
-                    transform: `translateY(-${textOffset * 0.4}vh)`,
+                    transform: `translateY(-${textOffset * 1.0}vh)`,
                     transition: isFrameTransition ? frameAnimationTrue : frameAnimationFalse,
                 }}
             >
