@@ -17,13 +17,13 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
   }, [isActive, transitionProgress, onTransitionComplete]);
 
   if (isActive) {
-    // Scale rapidly from 0 to 0.5 progress, then maintain full scale
+    // Full opacity from the beginning, only scale changes
+    opacity = 1; // Always fully opaque when visible
+    
     if (transitionProgress <= 0.5) {
       scale = transitionProgress * 2 * 250; // Max scale of 250 at 0.5 progress
-      opacity = transitionProgress * 2; // Opacity from 0 to 1
     } else {
       scale = 250; // Maintain full scale
-      opacity = 1; // Maintain full opacity
     }
   }
 
