@@ -5,54 +5,95 @@ import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 
 export default function ImagesLayer() {
   const [isClient, setIsClient] = useState(false);
-  const { scrollY } = useFrameScrollAnimation();
-  
-  // Set isClient to true when component mounts to avoid hydration errors
+  const { currentFrame, isFrameTransition } = useFrameScrollAnimation();
+
+  // Animation settings
+  const frameTransitionAnimationTrue = 'all 0.5s ease-out';
+  const frameTransitionAnimationFalse = 'all 0.2s linear';
+
+  // Array of images with their position/scale
+  const contentImages = [
+    {
+      id: "image-a",
+      src: "/images/a.png",
+      alt: "Image A - Our Vision",
+      positionPercentTop: 50,  // 20% down from viewport top
+      positionPercentLeft: 75, // 90% from left edge
+      scale: 1.0,
+      width: 400,              // px (optional)
+    },
+    {
+      id: "image-b",
+      src: "/images/b.png",
+      alt: "Image B - What We've Built",
+      positionPercentTop: 150,
+      positionPercentLeft: 25,
+      scale: 2.5,
+      width: 400,
+    },
+    {
+      id: "image-c",
+      src: "/images/c.png",
+      alt: "Image C - Who It's For",
+      positionPercentTop: 225,
+      positionPercentLeft: 80,
+      scale: 1.5,
+      width: 350,
+    },
+    {
+      id: "image-d",
+      src: "/images/d.png",
+      alt: "Image D - Who We Are",
+      positionPercentTop: 275,
+      positionPercentLeft: 20,
+      scale: 1.5,
+      width: 380,
+    },
+    {
+      id: "image-e",
+      src: "/images/e.png",
+      alt: "Image E - Additional Content",
+      positionPercentTop: 350,
+      positionPercentLeft: 35,
+      scale: 1.25,
+      width: 450,
+    },
+  ];
+
+  // Set isClient on mount
   useEffect(() => {
     setIsClient(true);
   }, []);
-  
-  // Only render on client side to avoid hydration mismatch
+
   if (!isClient) return null;
-  
+
   return (
-    <div 
-      className="fixed top-0 left-0 w-full h-full z-25 pointer-events-none"
-    >
-      {/* Image A - First section */}
-      <img 
-        src="/images/a.png"
-        alt="Image A - Our Vision"
-        className="absolute w-[400px] h-auto top-[20vh] right-[10vw] object-cover rounded-3xl shadow-lg"
-      />
-      
-      {/* Image B - Second section */}
-      <img 
-        src="/images/b.png"
-        alt="Image B - What We've Built"
-        className="absolute w-[400px] h-auto top-[120vh] left-[10vw] object-cover rounded-3xl shadow-lg"
-      />
-      
-      {/* Image C - Third section */}
-      <img 
-        src="/images/c.png"
-        alt="Image C - Who It's For"
-        className="absolute w-[350px] h-auto top-[220vh] right-[10vw] object-cover rounded-3xl shadow-lg"
-      />
-      
-      {/* Image D - Third section */}
-      <img 
-        src="/images/d.png"
-        alt="Image D - Who It's For"
-        className="absolute w-[380px] h-auto top-[270vh] left-[10vw] object-cover rounded-3xl shadow-lg"
-      />
-      
-      {/* Image E - Fourth section */}
-      <img 
-        src="/images/e.png"
-        alt="Image E - Additional Content"
-        className="absolute w-[450px] h-auto top-[320vh] left-[10vw] object-cover rounded-3xl shadow-lg"
-      />
-    </div>
+      <div className="fixed top-0 left-0 w-full h-full z-25 pointer-events-none">
+        {contentImages.map((image, index) => (
+            <img
+                key={image.id}
+                src={image.src}
+                alt={image.alt}
+                className="absolute object-cover rounded-3xl shadow-lg"
+                style={{
+                  top: `${image.positionPercentTop}vh`,   // Center vertically
+                  left: `${image.positionPercentLeft}vw`, // Center horizontally
+                  width: `${image.width}px`,
+                  height: 'auto',
+                  transform: `
+              translate(-50%, -50%)             /* Center the image */
+              scale(${image.scale || 1})        /* Scale the image */
+              ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
+            `,
+                  opacity: Math.abs(currentFrame - index) <= 1
+                      ? 1 - Math.abs(currentFrame - index) * 0.3
+                      : 0.4,
+                  transition: isFrameTransition
+                      ? frameTransitionAnimationTrue
+                      : frameTransitionAnimationFalse,
+                }}
+            />
+        ))}
+      </div>
   );
 }
