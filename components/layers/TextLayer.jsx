@@ -81,6 +81,17 @@ export default function TextLayer() {
       height: "h-screen",
       imagePosition: "left", // Image position for this frame
     },
+    {
+      id: "get-started",
+      title: "Get Started",
+      subtitle: "Start Creating Today",
+      description:
+          "Join our community and start bringing your stories to life.\nSign up for early access and be the first to experience the future of content creation.",
+      bgColor: "bg-transparent",
+      textColor: "text-white",
+      height: "h-screen",
+      imagePosition: "right", // Image position for this frame
+    },
   ];
 
   const {

@@ -40,18 +40,18 @@ export default function ImagesLayer() {
         className="absolute w-[350px] h-auto top-[220vh] right-[10vw] object-cover rounded-3xl shadow-lg"
       />
       
-      {/* Image D - Fourth section */}
+      {/* Image D - Third section */}
       <img 
         src="/images/d.png"
-        alt="Image D - Who We Are"
-        className="absolute w-[380px] h-auto top-[320vh] left-[10vw] object-cover rounded-3xl shadow-lg"
+        alt="Image D - Who It's For"
+        className="absolute w-[380px] h-auto top-[270vh] left-[10vw] object-cover rounded-3xl shadow-lg"
       />
       
-      {/* Image E - Fifth section */}
+      {/* Image E - Fourth section */}
       <img 
         src="/images/e.png"
         alt="Image E - Additional Content"
-        className="absolute w-[450px] h-auto top-[420vh] left-[calc(50%-225px)] object-cover rounded-3xl shadow-lg"
+        className="absolute w-[450px] h-auto top-[320vh] left-[10vw] object-cover rounded-3xl shadow-lg"
       />
     </div>
   );
