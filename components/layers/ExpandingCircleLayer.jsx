@@ -17,8 +17,8 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
   }, [isActive, transitionProgress, onTransitionComplete]);
 
   if (isActive) {
-    // Full opacity from the beginning, only scale changes
-    opacity = 1; // Always fully opaque when visible
+    // Always fully opaque when active
+    opacity = 1;
     
     if (transitionProgress <= 0.5) {
       scale = transitionProgress * 2 * 250; // Max scale of 250 at 0.5 progress
@@ -36,8 +36,8 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
         zIndex: 50, // Above all other layers
         transformOrigin: 'center center', // Expand from the center
         transform: `scale(${scale})`,
-        opacity: opacity, // Dynamic opacity
-        transition: 'transform 0.5s ease-linear, opacity 0.5s ease-linear', // Combined transition
+        opacity: isActive ? 1 : 0, // Always fully opaque when active
+        transition: 'transform 0.5s ease-linear' // Only transition the scale
       }}
     ></div>
   );
