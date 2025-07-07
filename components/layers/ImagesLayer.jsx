@@ -105,7 +105,7 @@ export default function ImagesLayer() {
                   height: 'auto',
                   transform: `
               translate(-50%, -50%)             /* Center the image */
-              scale(${image.scale * scaleMultiplier || 1})        /* Scale the image */
+              scale(${image.scale * (scaleMultiplier * 0.80) || 1})        /* Scale the image */
               ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
             `,
                   opacity: currentFrame === (image.frame-1) ? 1 : 0,
