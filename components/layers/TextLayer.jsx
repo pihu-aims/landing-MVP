@@ -44,9 +44,14 @@ export default function TextLayer() {
       description:
           "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
       bgColor: "bg-transparent",
-      textColor: "text-white",
+      titleColor: "text-white",
+      subTitleColor: "text-black",
+      headingColor: "text-black",
+      descriptionColor: "text-black",
       height: "h-screen",
-      imagePosition: "right", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 50,
+      positionPercentLeft: 35
     },
     {
       id: "what-we-built",
@@ -55,9 +60,15 @@ export default function TextLayer() {
       description:
           "We combine the best creative AI tools in one easy workspace.\nMake content, collaborate, monetize, and stay safe.\nAll in one place, with one subscription.",
       bgColor: "bg-transparent",
-      textColor: "text-white",
+      titleColor: "text-white",
+      subTitleColor: "text-white",
+      headingColor: "text-white",
+      descriptionColor: "text-white",
       height: "h-screen",
-      imagePosition: "left", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 65,
+      positionPercentLeft: 70,
+
     },
     {
       id: "who-its-for",
@@ -66,9 +77,14 @@ export default function TextLayer() {
       description:
           "We built this for filmmakers, students, influencers, designers and\nanyone with a story to tell.\nNo code needed. Just your ideas and our tools.",
       bgColor: "bg-transparent",
-      textColor: "text-white",
+      titleColor: "text-white",
+      subTitleColor: "text-white",
+      headingColor: "text-white",
+      descriptionColor: "text-white",
       height: "h-screen",
-      imagePosition: "right", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 25,
+      positionPercentLeft: 30,
     },
     {
       id: "who-we-are",
@@ -77,9 +93,14 @@ export default function TextLayer() {
       description:
           "We're a team of BAFTA-winning creators, AI experts, and proven operators.\nWe know how to build, ship and scale creative tech.",
       bgColor: "bg-transparent",
-      textColor: "text-white",
+      titleColor: "text-black",
+      subTitleColor: "text-black",
+      headingColor: "text-black",
+      descriptionColor: "text-black",
       height: "h-screen",
-      imagePosition: "left", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 30,
+      positionPercentLeft: 70,
     },
     {
       id: "get-started",
@@ -88,9 +109,14 @@ export default function TextLayer() {
       description:
           "Join our community and start bringing your stories to life.\nSign up for early access and be the first to experience the future of content creation.",
       bgColor: "bg-transparent",
-      textColor: "text-white",
+      titleColor: "text-white",
+      subTitleColor: "text-white",
+      headingColor: "text-white",
+      descriptionColor: "text-white",
       height: "h-screen",
-      imagePosition: "right", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 50,
+      positionPercentLeft: 50,
     },
   ];
 
@@ -150,15 +176,23 @@ export default function TextLayer() {
             >
               <div className="container mx-auto px-8 h-full flex items-center">
                 <div
-                    className={`max-w-2xl ${section.imagePosition === 'right' ? '' : 'ml-auto'}`}
+                    className={`max-w-2xl absolute`}
                     style={{
-                      opacity: Math.abs(currentFrame - index) <= 1 ? 1 - Math.abs(currentFrame - index) * 0.3 : 0.4,
-                      transform: `translateY(${isFrameTransition && currentFrame === index ? '5px' : '0px'})`,
-                      transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                      top: `${section.positionPercentTop || 0}vh`,        // Vertical center position
+                      left: `${section.positionPercentLeft || 0}vw`,      // Horizontal center position
+                      transform: `translate(-50%, -50%)          
+                        ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}`,
+                      opacity: Math.abs(currentFrame - index) <= 1
+                          ? 1 - Math.abs(currentFrame - index) * 0.3
+                          : 0.4,
+                      transition: isFrameTransition
+                          ? frameTransitionAnimationTrue
+                          : frameTranstionAnimationFalse,
                     }}
                 >
-                  <h2
-                      className={`text-5xl font-bold mb-4 ${section.textColor}`}
+
+                <h2
+                      className={`text-5xl font-bold mb-4 ${section.titleColor}`}
                       style={{
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                       }}
@@ -166,7 +200,7 @@ export default function TextLayer() {
                     {section.title}
                   </h2>
                   <h3
-                      className={`text-3xl font-bold mb-6 ${section.textColor}`}
+                      className={`text-3xl font-bold mb-6 ${section.subTitleColor}`}
                       style={{
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                       }}
@@ -176,7 +210,7 @@ export default function TextLayer() {
                   {index === 0 ? (
                       <>
                         <p
-                            className={`text-xl whitespace-pre-line ${section.textColor}`}
+                            className={`text-xl whitespace-pre-line ${section.headingColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                             }}
@@ -184,7 +218,7 @@ export default function TextLayer() {
                           {section.heading}
                         </p>
                         <p
-                            className={`text-xl mt-6 whitespace-pre-line ${section.textColor}`}
+                            className={`text-xl mt-6 whitespace-pre-line ${section.descriptionColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                             }}
@@ -194,7 +228,7 @@ export default function TextLayer() {
                       </>
                   ) : (
                       <p
-                          className={`text-xl whitespace-pre-line ${section.textColor}`}
+                          className={`text-xl whitespace-pre-line ${section.descriptionColor}`}
                           style={{
                             transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                           }}
