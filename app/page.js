@@ -19,9 +19,10 @@ export default function Home() {
         setContentHeight(`700vh`); // Adjust height if frames change
     }, []);
 
+
     const textOffset = currentFrame * 100; // Each frame = 100vh apart
-    const frameAnimationTrue = 'transform 1.6s ease-out'
-    const frameAnimationFalse = 'transform 0.2s linear'
+    const frameAnimationTrue = 'transform 1.8s ease-out'
+    const frameAnimationFalse = 'transform 1.0s linear'
     return (
         <div className="relative w-full" style={{ height: contentHeight }}>
 
@@ -29,7 +30,7 @@ export default function Home() {
             <div
                 className="fixed top-0 left-0 w-full h-full z-0"
                 style={{
-                    transform: `translateY(-${scrollY * 0.4}px)`,
+                    transform: `translateY(-${textOffset * 0.4}vh)`,
                     transition: isFrameTransition ? frameAnimationTrue : frameAnimationFalse,
                 }}
             >
@@ -59,7 +60,7 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
-                    transition: isFrameTransition ? frameAnimationTrue : frameAnimationFalse,
+                    transition: isFrameTransition ? 'transform 1.5s ease-out' : frameAnimationFalse,
                 }}
             >
                 <ImagesLayer />
