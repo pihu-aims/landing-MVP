@@ -18,7 +18,7 @@ export default function ImagesLayer() {
       src: "/images/a.png",
       alt: "Image A - Our Vision",
       positionPercentTop: 50,  // 20% down from viewport top
-      positionPercentLeft: 75, // 90% from left edge
+      positionPercentLeft: 65, // 90% from left edge
       scale: 1.0,
       width: 400,              // px (optional)
       frame: 1,
@@ -91,9 +91,7 @@ export default function ImagesLayer() {
               scale(${image.scale || 1})        /* Scale the image */
               ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
             `,
-                  opacity: Math.abs(currentFrame - index) <= 1
-                      ? 1 - Math.abs(currentFrame - index) * 0.3
-                      : 0.4,
+                  opacity: currentFrame === (image.frame-1) ? 1 : 0,
                   transition: isFrameTransition
                       ? frameTransitionAnimationTrue
                       : frameTransitionAnimationFalse,
