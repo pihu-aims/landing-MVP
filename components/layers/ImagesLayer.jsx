@@ -18,9 +18,6 @@ export default function ImagesLayer() {
   return (
     <div 
       className="fixed top-0 left-0 w-full h-full z-25 pointer-events-none"
-      style={{
-        transform: `translateY(${scrollY * -1.5}px)`,
-      }}
     >
       {/* Image A - First section */}
       <img 

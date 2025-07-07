@@ -1,21 +1,27 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TopBar from './Topbar';
 import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 
 export default function TextLayer() {
-  const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false)
+  const prevFrame = useRef(null); // store previous frame index
+  // This is an animation lock
+  const [isNavigating, setIsNavigating] = useState(false);
+
+
+
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+    framePositionMultipliers: [0, 1, 2, 3,4,5], // Default: frames at 0, 1x, 2x, and 3x viewport height
     useIntersectionObserver: true,
-    transitionDelay: 300,
-    scrollPauseDelay: 0, // Disable scroll pausing to fix scrolling issues
-    minTimeBetweenTransitions: 300,
-    enableSnapToFrame: false, // Disable automatic snap to allow normal scrolling
-    scrollSnapThreshold: 0.9
+    transitionDelay: 600,
+    scrollPauseDelay: 400,
+    minTimeBetweenTransitions: 500,
+    enableSnapToFrame: true,
+    scrollSnapThreshold: 0.3
   });
 
   // Navigation menu items
@@ -36,7 +42,7 @@ export default function TextLayer() {
       subtitle: "Create Together",
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
-        "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
+          "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
       bgColor: "bg-transparent",
       textColor: "text-white",
       height: "h-screen",
@@ -47,7 +53,7 @@ export default function TextLayer() {
       title: "What We've Built",
       subtitle: "All the Best Creative AI Tools. One Place.",
       description:
-        "We combine the best creative AI tools in one easy workspace.\nMake content, collaborate, monetize, and stay safe.\nAll in one place, with one subscription.",
+          "We combine the best creative AI tools in one easy workspace.\nMake content, collaborate, monetize, and stay safe.\nAll in one place, with one subscription.",
       bgColor: "bg-transparent",
       textColor: "text-white",
       height: "h-screen",
@@ -58,7 +64,7 @@ export default function TextLayer() {
       title: "Who It's For",
       subtitle: "Studio1 is for Everyone Ready to Create",
       description:
-        "We built this for filmmakers, students, influencers, designers and\nanyone with a story to tell.\nNo code needed. Just your ideas and our tools.",
+          "We built this for filmmakers, students, influencers, designers and\nanyone with a story to tell.\nNo code needed. Just your ideas and our tools.",
       bgColor: "bg-transparent",
       textColor: "text-white",
       height: "h-screen",
@@ -69,7 +75,7 @@ export default function TextLayer() {
       title: "Who We Are",
       subtitle: "Creative Vision Meets Technical Firepower",
       description:
-        "We're a team of BAFTA-winning creators, AI experts, and proven operators.\nWe know how to build, ship and scale creative tech.",
+          "We're a team of BAFTA-winning creators, AI experts, and proven operators.\nWe know how to build, ship and scale creative tech.",
       bgColor: "bg-transparent",
       textColor: "text-white",
       height: "h-screen",
@@ -77,127 +83,142 @@ export default function TextLayer() {
     },
   ];
 
-  const { 
-    currentFrame, 
-    registerFrame, 
-    isFrameTransition, 
+  const {
+    currentFrame,
+    registerFrame,
+    isFrameTransition,
     scrollToFrame,
-    transitionProgress 
+    transitionProgress
   } = useFrameScrollAnimation(frameConfig);
 
-  // Set isClient to true when component mounts to avoid hydration errors
   useEffect(() => {
     setIsClient(true);
-    
-    // Update frame config based on viewport height
-    const viewportHeight = window.innerHeight;
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30] // One multiplier for each content section
+      framePositionMultipliers: [0, 1, 2, 3,4,5]
     }));
   }, []);
 
-  // Function to handle navigation to a specific frame
+  // Handle navigation
   const handleFrameNavigation = (index) => {
     scrollToFrame(index);
   };
 
-  // Only render on client side to avoid hydration mismatch
+  // 🔥 Auto trigger when scroll crosses into a new frame
+  useEffect(() => {
+    if (
+        prevFrame.current !== null &&
+        prevFrame.current !== currentFrame &&
+        !isNavigating // Prevent if already snapping
+    ) {
+      setIsNavigating(true);
+      handleFrameNavigation(currentFrame);
+      setTimeout(() => setIsNavigating(false), 700); // match transition duration
+    }
+
+
+    prevFrame.current = currentFrame;
+  }, [currentFrame]); // runs every time scroll updates currentFrame
+
   if (!isClient) return null;
 
+  // Style strings for reusability
+  const frameTransitionAnimationTrue = 'all 0.5s ease-out';
+  const frameTranstionAnimationFalse = 'all 0.2s';
+
   return (
-    <div className="w-full h-full">
-      {/* Navigation buttons for frame navigation */}
-      <div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">
-        {frameConfig.framePositionMultipliers.map((_, index) => (
-          <button
-            key={`nav-${index}`}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              currentFrame === index ? 'bg-white scale-125' : 'bg-gray-400 hover:bg-gray-200'
-            }`}
-            onClick={() => handleFrameNavigation(index)}
-            aria-label={`Navigate to frame ${index + 1}`}
-          />
-        ))}
-      </div>
+      <div className="w-full h-full">
+        {/* Navigation buttons for frame navigation */}
+        <div className="fixed top-1/2 right-8 z-50 transform -translate-y-1/2 flex flex-col space-y-4">
+          {contentSections.map((_, index) => (
+              <button
+                  key={`nav-${index}`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      currentFrame === index ? 'bg-white scale-125' : 'bg-gray-400 hover:bg-gray-200'
+                  }`}
+                  onClick={() => handleFrameNavigation(index)}
+                  aria-label={`Navigate to frame ${index + 1}`}
+              />
+          ))}
+        </div>
 
-      {/* Content Sections */}
-      {contentSections.map((section, index) => (
-        <section
-          key={section.id}
-          id={section.id}
-          ref={(el) => registerFrame(index, el)}
-          className={`w-full ${section.height} ${section.bgColor} relative flex items-center`}
-        >
-          <div className="container mx-auto px-8 h-full flex items-center">
-            <div 
-              className={`max-w-2xl ${section.imagePosition === 'right' ? '' : 'ml-auto'}`}
-              style={{
-                opacity: Math.abs(currentFrame - index) <= 1 ? 1 - Math.abs(currentFrame - index) * 0.3 : 0.4,
-                transform: `translateY(${isFrameTransition && currentFrame === index ? '5px' : '0px'})`,
-                transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
-              }}
+        {/* Content Sections */}
+        {contentSections.map((section, index) => (
+            <section
+                key={section.id}
+                id={section.id}
+                ref={(el) => registerFrame(index, el)}
+                className={`w-full ${section.height} ${section.bgColor} relative flex items-center`}
             >
-              <h2 
-                className={`text-5xl font-bold mb-4 ${section.textColor}`}
-                style={{
-                  transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
-                }}
-              >
-                {section.title}
-              </h2>
-              <h3 
-                className={`text-3xl font-bold mb-6 ${section.textColor}`}
-                style={{
-                  transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
-                }}
-              >
-                {section.subtitle}
-              </h3>
-              {index === 0 ? (
-                <>
-                  <p 
-                    className={`text-xl whitespace-pre-line ${section.textColor}`}
+              <div className="container mx-auto px-8 h-full flex items-center">
+                <div
+                    className={`max-w-2xl ${section.imagePosition === 'right' ? '' : 'ml-auto'}`}
                     style={{
-                      transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
+                      opacity: Math.abs(currentFrame - index) <= 1 ? 1 - Math.abs(currentFrame - index) * 0.3 : 0.4,
+                      transform: `translateY(${isFrameTransition && currentFrame === index ? '5px' : '0px'})`,
+                      transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                     }}
-                  >
-                    {section.heading}
-                  </p>
-                  <p 
-                    className={`text-xl mt-6 whitespace-pre-line ${section.textColor}`}
-                    style={{
-                      transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
-                    }}
-                  >
-                    {section.description}
-                  </p>
-                </>
-              ) : (
-                <p 
-                  className={`text-xl whitespace-pre-line ${section.textColor}`}
-                  style={{
-                    transition: isFrameTransition ? 'all 0.4s ease-out' : 'all 0.2s',
-                  }}
                 >
-                  {section.description}
-                </p>
-              )}
-            </div>
-          </div>
-        </section>
-      ))}
-
-      {/* Spacer divs for scroll snapping - these create the scrollable area */}
-      <div className="relative">
-        {Array(11).fill(null).map((_, index) => (
-          <div 
-            key={`spacer-${index}`} 
-            className="w-full h-screen"
-            style={{ visibility: 'hidden' }}
-          />
+                  <h2
+                      className={`text-5xl font-bold mb-4 ${section.textColor}`}
+                      style={{
+                        transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                      }}
+                  >
+                    {section.title}
+                  </h2>
+                  <h3
+                      className={`text-3xl font-bold mb-6 ${section.textColor}`}
+                      style={{
+                        transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                      }}
+                  >
+                    {section.subtitle}
+                  </h3>
+                  {index === 0 ? (
+                      <>
+                        <p
+                            className={`text-xl whitespace-pre-line ${section.textColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                            }}
+                        >
+                          {section.heading}
+                        </p>
+                        <p
+                            className={`text-xl mt-6 whitespace-pre-line ${section.textColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                            }}
+                        >
+                          {section.description}
+                        </p>
+                      </>
+                  ) : (
+                      <p
+                          className={`text-xl whitespace-pre-line ${section.textColor}`}
+                          style={{
+                            transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                          }}
+                      >
+                        {section.description}
+                      </p>
+                  )}
+                </div>
+              </div>
+            </section>
         ))}
+
+        {/* Spacer divs for scroll snapping - these create the scrollable area */}
+        <div className="relative">
+          {contentSections.map((_, index) => (
+              <div
+                  key={`spacer-${index}`}
+                  className="w-full h-screen"
+                  style={{ visibility: 'hidden' }}
+              />
+          ))}
+        </div>
       </div>
-    </div>
   );
 }
