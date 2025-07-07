@@ -47,6 +47,9 @@ export default function TextLayer() {
       textColor: "text-white",
       height: "h-screen",
       imagePosition: "right", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 50,
+      positionPercentLeft: 30
     },
     {
       id: "what-we-built",
@@ -58,6 +61,10 @@ export default function TextLayer() {
       textColor: "text-white",
       height: "h-screen",
       imagePosition: "left", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 65,
+      positionPercentLeft: 70,
+
     },
     {
       id: "who-its-for",
@@ -150,14 +157,22 @@ export default function TextLayer() {
             >
               <div className="container mx-auto px-8 h-full flex items-center">
                 <div
-                    className={`max-w-2xl ${section.imagePosition === 'right' ? '' : 'ml-auto'}`}
+                    className={`max-w-2xl absolute ${section.imagePosition === 'right' ? '' : 'ml-auto'}`}
                     style={{
-                      opacity: Math.abs(currentFrame - index) <= 1 ? 1 - Math.abs(currentFrame - index) * 0.3 : 0.4,
-                      transform: `translateY(${isFrameTransition && currentFrame === index ? '5px' : '0px'})`,
-                      transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                      top: `${section.positionPercentTop || 0}vh`,        // Vertical center position
+                      left: `${section.positionPercentLeft || 0}vw`,      // Horizontal center position
+                      transform: `translate(-50%, -50%)          
+                        ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}`,
+                      opacity: Math.abs(currentFrame - index) <= 1
+                          ? 1 - Math.abs(currentFrame - index) * 0.3
+                          : 0.4,
+                      transition: isFrameTransition
+                          ? frameTransitionAnimationTrue
+                          : frameTranstionAnimationFalse,
                     }}
                 >
-                  <h2
+
+                <h2
                       className={`text-5xl font-bold mb-4 ${section.textColor}`}
                       style={{
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
