@@ -6,6 +6,23 @@ import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 export default function ImagesLayer() {
   const [isClient, setIsClient] = useState(false);
   const { currentFrame, isFrameTransition } = useFrameScrollAnimation();
+  const [scaleMultiplier, setScaleMultiplier] = useState(1); // Scaling of iamges
+
+  useEffect(() => {
+    const handleResize = () => {
+      const baselineWidth = 1920; // Fullscreen baseline
+      const currentWidth = window.innerWidth;
+
+      // Scale proportionally
+      const multiplier = currentWidth / baselineWidth;
+      setScaleMultiplier(multiplier);
+    };
+
+    handleResize(); // Run once on mount
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Animation settings
   const frameTransitionAnimationTrue = 'all 0.5s ease-out';
@@ -17,11 +34,11 @@ export default function ImagesLayer() {
       id: "image-a",
       src: "/images/a.png",
       alt: "Image A - Our Vision",
-      positionPercentTop: 50,  // 20% down from viewport top
-      positionPercentLeft: 65, // 90% from left edge
-      scale: 1.0,
+      positionPercentTop: 50,  //down from viewport top
+      positionPercentLeft: 70, //from left edge
+      scale: 1.2, // The scale is the scale from the image resolution (in terms of pixels)
       width: 400,              // px (optional)
-      frame: 1,
+      frame: 1, // which frame it appears on
     },
     {
       id: "image-b",
@@ -29,7 +46,7 @@ export default function ImagesLayer() {
       alt: "Image B - What We've Built",
       positionPercentTop: 50,
       positionPercentLeft: 25,
-      scale: 2.5,
+      scale: 2,
       width: 400,
       frame: 2,
     },
@@ -39,7 +56,7 @@ export default function ImagesLayer() {
       alt: "Image C - Who It's For",
       positionPercentTop: 25,
       positionPercentLeft: 80,
-      scale: 1.5,
+      scale: 1.35,
       width: 350,
       frame: 3,
     },
@@ -49,7 +66,7 @@ export default function ImagesLayer() {
       alt: "Image D - Who We Are",
       positionPercentTop: 75,
       positionPercentLeft: 20,
-      scale: 1.5,
+      scale: 1.35,
       width: 380,
       frame: 3,
     },
@@ -88,7 +105,7 @@ export default function ImagesLayer() {
                   height: 'auto',
                   transform: `
               translate(-50%, -50%)             /* Center the image */
-              scale(${image.scale || 1})        /* Scale the image */
+              scale(${image.scale * scaleMultiplier || 1})        /* Scale the image */
               ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
             `,
                   opacity: currentFrame === (image.frame-1) ? 1 : 0,
