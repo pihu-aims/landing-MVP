@@ -76,6 +76,9 @@ export default function TextLayer() {
       textColor: "text-white",
       height: "h-screen",
       imagePosition: "right", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 25,
+      positionPercentLeft: 30,
     },
     {
       id: "who-we-are",
@@ -87,6 +90,9 @@ export default function TextLayer() {
       textColor: "text-white",
       height: "h-screen",
       imagePosition: "left", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 60,
+      positionPercentLeft: 70,
     },
     {
       id: "get-started",
@@ -98,6 +104,9 @@ export default function TextLayer() {
       textColor: "text-white",
       height: "h-screen",
       imagePosition: "right", // Image position for this frame
+      // Alignment variables
+      positionPercentTop: 50,
+      positionPercentLeft: 50,
     },
   ];
 
