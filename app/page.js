@@ -10,19 +10,26 @@ import useFrameScrollAnimation from '../hooks/useFrameScrollAnimation';
 import { useEffect, useState } from 'react';
 import ImagesLayer from "@/components/layers/ImagesLayer";
 import ExpandingCircleLayer from "@/components/layers/ExpandingCircleLayer";
+import WaitlistPage from "@/components/WaitlistPage";
 
 export default function Home() {
     const { scrollY, currentFrame, isFrameTransition, transitionProgress } = useFrameScrollAnimation();
     const [contentHeight, setContentHeight] = useState('700vh'); // For 7 frames
+    const [showWaitlist, setShowWaitlist] = useState(false);
 
     useEffect(() => {
         setContentHeight(`700vh`); // Adjust height if frames change
     }, []);
 
-
     const textOffset = currentFrame * 100; // Each frame = 100vh apart
-    const frameAnimationTrue = 'transform 1.8s ease-out'
-    const frameAnimationFalse = 'transform 1.0s linear'
+    const frameAnimationTrue = 'transform 1.8s ease-out';
+    const frameAnimationFalse = 'transform 1.0s linear';
+    
+    // Handle the transition completion from the expanding circle
+    const handleTransitionComplete = (isComplete) => {
+        setShowWaitlist(isComplete);
+    };
+
     return (
         <div className="relative w-full" style={{ height: contentHeight }}>
 
@@ -76,9 +83,14 @@ export default function Home() {
             )}
 
             {/* Expanding Circle Layer */}
+            <ExpandingCircleLayer 
+                currentFrame={currentFrame} 
+                isFrameTransition={isFrameTransition} 
+                transitionProgress={transitionProgress} 
+                onTransitionComplete={handleTransitionComplete}
+            />
 
-            {/*FAULTY CODE*/}
-            <ExpandingCircleLayer currentFrame={currentFrame} isFrameTransition={isFrameTransition} transitionProgress={transitionProgress} />
+            {/* Waitlist Page - appears after circle transition */}
+            <WaitlistPage isVisible={showWaitlist} />
         </div>
     );
-}
