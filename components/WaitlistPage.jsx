@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { captureEmail } from '../lib/supabase';
 
 const WaitlistPage = ({ isVisible }) => {
@@ -8,6 +8,11 @@ const WaitlistPage = ({ isVisible }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+  
+  // Video URL - Using the requested video source
+  const mp4VideoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,11 +47,37 @@ const WaitlistPage = ({ isVisible }) => {
       }`}
     >
       <div className="max-w-3xl mx-auto w-full">
-        {/* Video Placeholder */}
-        <div className="w-full aspect-video bg-gray-200 rounded-lg mb-8 flex items-center justify-center">
-          <div className="h-14 w-14 rounded-full border-2 border-gray-700 flex items-center justify-center">
-            <div className="ml-1 w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-gray-700 border-b-8 border-b-transparent"></div>
-          </div>
+        {/* Video Player */}
+        <div className="w-full aspect-video bg-black rounded-lg mb-8 relative overflow-hidden">
+          {/* Video element with multiple sources */}
+          <video
+            ref={videoRef}
+            className="w-full h-full object-cover"
+            controls={isPlaying}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onEnded={() => setIsPlaying(false)}
+            preload="metadata"
+          >
+            {/* MP4 video source */}
+            <source src={mp4VideoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          
+          {/* Play button overlay - only shown when video is not playing */}
+          {!isPlaying && (
+            <div 
+              className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-30"
+              onClick={() => {
+                videoRef.current.play();
+                setIsPlaying(true);
+              }}
+            >
+              <div className="h-16 w-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center hover:bg-opacity-100 transition-all">
+                <div className="ml-1 w-0 h-0 border-t-10 border-t-transparent border-l-14 border-l-black border-b-10 border-b-transparent"></div>
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Heading */}
