@@ -22,7 +22,9 @@ export default function Home() {
     }, []);
 
     const textOffset = currentFrame * 100; // Each frame = 100vh apart
-
+    const frameAnimationTrue = 'transform 1.8s ease-out';
+    const frameAnimationFalse = 'transform 1.0s linear';
+    
     // Handle the transition completion from the expanding circle
     const handleTransitionComplete = (isComplete) => {
         setShowWaitlist(isComplete);
@@ -35,8 +37,8 @@ export default function Home() {
             <div
                 className="fixed top-0 left-0 w-full h-full z-0"
                 style={{
-                    transform: `translateY(-${scrollY * 0.4}px)`,
-                    transition: isFrameTransition ? 'transform 1.6s ease-out' : 'transform 0.2s linear',
+                    transform: `translateY(-${textOffset * 0.4}vh)`,
+                    transition: isFrameTransition ? frameAnimationTrue : frameAnimationFalse,
                 }}
             >
                 <BackgroundLayerOne />
@@ -54,7 +56,7 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
-                    transition: isFrameTransition ? 'transform 1.2s ease-out' : 'none',
+                    transition: isFrameTransition ? frameAnimationTrue : frameAnimationFalse,
                 }}
             >
                 <TextLayer />
@@ -65,7 +67,7 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
-                    transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none',
+                    transition: isFrameTransition ? 'transform 1.5s ease-out' : frameAnimationFalse,
                 }}
             >
                 <ImagesLayer />
@@ -92,4 +94,3 @@ export default function Home() {
             <WaitlistPage isVisible={showWaitlist} />
         </div>
     );
-}
