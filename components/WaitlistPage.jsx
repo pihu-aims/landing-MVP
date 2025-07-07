@@ -1,6 +1,40 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
+import { captureEmail } from '../lib/supabase';
 
 const WaitlistPage = ({ isVisible }) => {
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const { success, error: apiError } = await captureEmail(email);
+      
+      if (!success) {
+        setError(apiError || 'Something went wrong. Please try again.');
+      } else {
+        setIsSuccess(true);
+        setEmail('');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <div 
       className={`fixed inset-0 bg-white z-60 flex flex-col items-center justify-start pt-12 px-4 overflow-auto transition-opacity duration-500 ${
@@ -25,14 +59,37 @@ const WaitlistPage = ({ isVisible }) => {
         </p>
         
         {/* Email Form */}
-        <div className="flex w-full max-w-md mx-auto gap-2">
-          <input
-            type="email"
-            placeholder="Enter email address"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button className="bg-black text-white px-6 py-2 rounded-lg font-medium">Join Waitlist</button>
-        </div>
+        {!isSuccess ? (
+          <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md mx-auto gap-4">
+            <div className="flex w-full gap-2">
+              <input
+                type="email"
+                placeholder="Enter email address"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+              />
+              <button 
+                type="submit" 
+                className="bg-black text-white px-6 py-2 rounded-lg font-medium disabled:opacity-50"
+                disabled={isLoading}
+              >
+                {isLoading ? "Submitting..." : "Join Waitlist"}
+              </button>
+            </div>
+            
+            {error && (
+              <p className="text-red-500 text-center">{error}</p>
+            )}
+          </form>
+        ) : (
+          <div className="p-4 bg-green-100 rounded-lg border border-green-300 max-w-md mx-auto">
+            <p className="text-green-700 text-center">
+              Thank you! Your email has been added to our waitlist.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
