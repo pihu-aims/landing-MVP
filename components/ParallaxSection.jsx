@@ -46,7 +46,7 @@ export default function ParallaxSection() {
   return (
     <div 
       ref={containerRef}
-      className="relative h-[3000vh] overflow-hidden"
+      className="relative h-[600vh] overflow-hidden"
     >
       {/* First Background Layer - For frames 0-1 */}
       <motion.div 
