@@ -16,11 +16,11 @@ import {Button} from "@/components/ui/button";
 
 export default function Home() {
     const { scrollY, currentFrame, isFrameTransition, transitionProgress } = useFrameScrollAnimation();
-    const [contentHeight, setContentHeight] = useState('1600vh'); // For 7 frames
+    const [contentHeight, setContentHeight] = useState('1800vh'); // For 7 frames
     const [showWaitlist, setShowWaitlist] = useState(false);
 
     useEffect(() => {
-        setContentHeight(`1600vh`); // Adjust height if frames change
+        setContentHeight(`1800vh`); // Adjust height if frames change
     }, []);
 
     const textOffset = currentFrame * 100; // Each frame = 100vh apart
@@ -87,7 +87,7 @@ export default function Home() {
             {/* Frame indicator (optional) */}
             {/*Hide in production!!!!!!!!!!!*/}
             {isFrameTransition && (
-                <div className="fixed bottom-8 right-8 bg-black/60 text-white px-4 py-2 rounded-full z-40">
+                <div className="fixed bottom-8 right-8 bg-black/60 text-white px-4 py-2 rounded-full z-4000">
                     Frame {currentFrame + 1}
                 </div>
             )}
@@ -101,7 +101,7 @@ export default function Home() {
             />
 
             {/* Waitlist Page - appears after circle transition */}
-            <WaitlistPage isVisible={showWaitlist} />
+            <WaitlistPage isVisible={showWaitlist && currentFrame >=5} />
         </div>
     );
 }
