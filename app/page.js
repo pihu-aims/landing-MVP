@@ -22,7 +22,9 @@ export default function Home() {
     }, []);
 
     const textOffset = currentFrame * 100; // Each frame = 100vh apart
-
+    const frameAnimationTrue = 'transform 1.8s ease-out';
+    const frameAnimationFalse = 'transform 1.0s linear';
+    
     // Handle the transition completion from the expanding circle
     const handleTransitionComplete = (isComplete) => {
         setShowWaitlist(isComplete);
@@ -38,6 +40,7 @@ export default function Home() {
                     transform: `translateY(-${scrollY * 0.4}px)`,
                     transition: isFrameTransition ? 'transform 1.6s ease-out' : 'transform 0.2s linear',
                     opacity: 1 // Ensure backgrounds are always fully visible
+
                 }}
             >
                 <BackgroundLayerOne />
@@ -55,8 +58,10 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
+
                     transition: isFrameTransition ? 'transform 1.2s ease-out' : 'none',
                     opacity: 1 // Ensure text is always fully visible
+
                 }}
             >
                 <TextLayer />
@@ -67,8 +72,10 @@ export default function Home() {
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
+
                     transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none',
                     opacity: 1 // Ensure images are always fully visible
+
                 }}
             >
                 <ImagesLayer />
@@ -94,5 +101,5 @@ export default function Home() {
             {/* Waitlist Page - appears after circle transition */}
             <WaitlistPage isVisible={showWaitlist} />
         </div>
-    );
+    );    
 }
