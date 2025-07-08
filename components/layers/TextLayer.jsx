@@ -39,7 +39,7 @@ export default function TextLayer() {
     {
       id: "studio1",
       title: "Studio1",
-      subtitle: "Create Together",
+      subtitle: "Lets Create",
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
           "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
@@ -132,7 +132,7 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 3.0, 4.5, 7.0, 9.0], // Reduced gap between frames 2 and 3
+      framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0],
       useIntersectionObserver: false,
       enableSnapToFrame: false
     }));
@@ -184,9 +184,10 @@ export default function TextLayer() {
                       left: `${section.positionPercentLeft || 0}vw`,      // Horizontal center position
                       transform: `translate(-50%, -50%)          
                         ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}`,
-                      opacity: Math.abs(currentFrame - index) <= 1
-                          ? 1 - Math.abs(currentFrame - index) * 0.3
-                          : 0.4,
+                      opacity: 1,
+                      //opacity: Math.abs(currentFrame - index) <= 1
+                          //? 1 - Math.abs(currentFrame - index) * 0.3
+                          //: 0.4,
                       transition: isFrameTransition
                           ? frameTransitionAnimationTrue
                           : frameTranstionAnimationFalse,
