@@ -40,7 +40,7 @@ export default function TextLayer() {
       id: "studio1",
       title: "Studio1",
 
-      subtitle: "Let's Create",
+      subtitle: "Create Together",
 
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
@@ -54,7 +54,7 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 50,
       positionPercentLeft: 30,
-      maxWidth: 30
+      maxWidth: 50
     },
     {
       id: "what-we-built",
@@ -71,7 +71,7 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 66.5,
       positionPercentLeft: 70,
-      maxWidth: 30
+      maxWidth: 45
     },
     {
       id: "who-its-for",
@@ -109,22 +109,23 @@ export default function TextLayer() {
       positionPercentLeft: 70,
       maxWidth: 30
     },
-    {
-      id: "get-started",
-      title: "Get Started",
-      subtitle: "Start Creating Today",
-      description:
-          "Join our community and start bringing your stories to life.\nSign up for early access and be the first to experience the future of content creation.",
-      bgColor: "bg-transparent",
-      titleColor: "text-white",
-      subTitleColor: "text-white",
-      headingColor: "text-white",
-      descriptionColor: "text-white",
-      height: "h-screen",
-      // Alignment variables
-      positionPercentTop: 50,
-      positionPercentLeft: 50,
-    },
+    // {
+    //   id: "get-started",
+    //   title: "Get Started",
+    //   subtitle: "Start Creating Today",
+    //   description:
+    //       "Join our community and start bringing your stories to life.\nSign up for early access and be the first to experience the future of content creation.",
+    //   bgColor: "bg-transparent",
+    //   titleColor: "text-white",
+    //   subTitleColor: "text-white",
+    //   headingColor: "text-white",
+    //   descriptionColor: "text-white",
+    //   height: "h-screen",
+    //   // Alignment variables
+    //   positionPercentTop: 50,
+    //   positionPercentLeft: 50,
+    //   maxWidth: 100
+    // },
   ];
 
   const {
