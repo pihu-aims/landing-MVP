@@ -36,8 +36,8 @@ export default function ImagesLayer() {
       alt: "Image A - Our Vision",
       positionPercentTop: 50,  //down from viewport top
       positionPercentLeft: 70, //from left edge
-      scale: 1.2, // The scale is the scale from the image resolution (in terms of pixels)
-      width: 400,              // px (optional)
+      scale: 1.4, // The scale is the scale from the image resolution (in terms of pixels)
+      width: 475,              // px (optional)
       frame: 1, // which frame it appears on
     },
     {
