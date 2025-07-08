@@ -5,7 +5,7 @@ import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 
 export default function ImagesLayer() {
   const [isClient, setIsClient] = useState(false);
-  const { scrollY } = useFrameScrollAnimation();
+  const { scrollY, isFrameTransition } = useFrameScrollAnimation();
   
   // Set isClient to true when component mounts to avoid hydration errors
   useEffect(() => {
@@ -15,15 +15,23 @@ export default function ImagesLayer() {
   // Only render on client side to avoid hydration mismatch
   if (!isClient) return null;
   
+  // Common image style to ensure no fading
+  const imageStyle = {
+    opacity: 1,
+    transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none'
+  };
+  
   return (
     <div 
       className="fixed top-0 left-0 w-full h-full z-25 pointer-events-none"
+      style={{ opacity: 1 }}
     >
       {/* Image A - First section */}
       <img 
         src="/images/a.png"
         alt="Image A - Our Vision"
         className="absolute w-[400px] h-auto top-[20vh] right-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
       />
       
       {/* Image B - Second section */}
@@ -31,6 +39,7 @@ export default function ImagesLayer() {
         src="/images/b.png"
         alt="Image B - What We've Built"
         className="absolute w-[400px] h-auto top-[120vh] left-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
       />
       
       {/* Image C - Third section */}
@@ -38,6 +47,7 @@ export default function ImagesLayer() {
         src="/images/c.png"
         alt="Image C - Who It's For"
         className="absolute w-[350px] h-auto top-[220vh] right-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
       />
       
       {/* Image D - Fourth section */}
@@ -45,6 +55,7 @@ export default function ImagesLayer() {
         src="/images/d.png"
         alt="Image D - Who We Are"
         className="absolute w-[380px] h-auto top-[320vh] left-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
       />
       
       {/* Image E - Fifth section */}
@@ -52,6 +63,7 @@ export default function ImagesLayer() {
         src="/images/e.png"
         alt="Image E - Additional Content"
         className="absolute w-[450px] h-auto top-[420vh] left-[calc(50%-225px)] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
       />
     </div>
   );
