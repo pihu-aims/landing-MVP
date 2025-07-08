@@ -78,7 +78,7 @@ export default function ImagesLayer() {
       alt: "Image E - Additional Content",
       positionPercentTop: 50,
       positionPercentLeft: 30,
-      scale: 1.35,
+      scale: 1.5,
       width: 460,
       frame: 4,
     },

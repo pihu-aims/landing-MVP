@@ -40,7 +40,7 @@ export default function TextLayer() {
       id: "studio1",
       title: "Studio1",
 
-      subtitle: "Let's Create",
+      subtitle: "Create Together",
 
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
@@ -53,7 +53,10 @@ export default function TextLayer() {
       height: "h-screen",
       // Alignment variables
       positionPercentTop: 50,
-      positionPercentLeft: 35,
+      positionPercentLeft: 30,
+      maxWidth: 40,
+      prefWidth: 35,
+      minWidth: 30,
     },
     {
       id: "what-we-built",
@@ -70,6 +73,9 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 66.5,
       positionPercentLeft: 70,
+      maxWidth: 45,
+      prefWidth: 37,
+      minWidth: 30,
     },
     {
       id: "who-its-for",
@@ -85,8 +91,11 @@ export default function TextLayer() {
       height: "h-screen",
       // Alignment variables
 
-      positionPercentTop: 40,
-      positionPercentLeft: 30,
+      positionPercentTop: 20,
+      positionPercentLeft: 35,
+      maxWidth: 50,
+      prefWidth: 40,
+      minWidth: 30,
 
     },
     {
@@ -104,23 +113,27 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 60,
       positionPercentLeft: 70,
+      maxWidth: 30,
+      prefWidth: 27,
+      minWidth: 25,
     },
-    {
-      id: "get-started",
-      title: "Get Started",
-      subtitle: "Start Creating Today",
-      description:
-          "Join our community and start bringing your stories to life.\nSign up for early access and be the first to experience the future of content creation.",
-      bgColor: "bg-transparent",
-      titleColor: "text-white",
-      subTitleColor: "text-white",
-      headingColor: "text-white",
-      descriptionColor: "text-white",
-      height: "h-screen",
-      // Alignment variables
-      positionPercentTop: 50,
-      positionPercentLeft: 50,
-    },
+    // {
+    //   id: "get-started",
+    //   title: "Get Started",
+    //   subtitle: "Start Creating Today",
+    //   description:
+    //       "Join our community and start bringing your stories to life.\nSign up for early access and be the first to experience the future of content creation.",
+    //   bgColor: "bg-transparent",
+    //   titleColor: "text-white",
+    //   subTitleColor: "text-white",
+    //   headingColor: "text-white",
+    //   descriptionColor: "text-white",
+    //   height: "h-screen",
+    //   // Alignment variables
+    //   positionPercentTop: 50,
+    //   positionPercentLeft: 50,
+    //   maxWidth: 100
+    // },
   ];
 
   const {
@@ -167,6 +180,10 @@ export default function TextLayer() {
   // Style strings for reusability
   const frameTransitionAnimationTrue = 'all 0.5s ease-out';
   const frameTranstionAnimationFalse = 'all 0.2s';
+  const scalingFontSizeTitle = `clamp(2rem, 5vw, 6rem)`;
+  const scalingFontSizeSubtitle = `clamp(1.5rem, 3vw, 3.5rem)`
+  const scalingFontSizeHeading = `clamp(1.25rem, 2.5vw, 2.5rem)`
+  const scalingFontSizeDescription = `clamp(1rem, 1.8vw, 1.8rem)`
 
   return (
       <div className="w-full h-full">
@@ -194,7 +211,9 @@ export default function TextLayer() {
                       transition: isFrameTransition
                           ? frameTransitionAnimationTrue
                           : frameTranstionAnimationFalse,
-                    }}
+                      maxWidth: `clamp(${section.minWidth || 30}vh, ${section.prefWidth || 50}vh, ${section.maxWidth || 80}vh)`, // 👈 Max width as % of viewport height
+                    }
+                }
                 >
 
                 {index === 0 ? (
