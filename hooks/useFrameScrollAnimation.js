@@ -4,14 +4,21 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function useFrameScrollAnimation(options = {}) {
   const {
-    framePositionMultipliers = [0, 1, 5.0, 8.0, 11.0, 12.0], // Modified: Much larger gaps between later frames
+    framePositionMultipliers = [0, 0.8, 5.0, 8.0, 11.0, 12.0], // Modified: Much larger gaps between later frames
     useIntersectionObserver = false, // Disable intersection observer for more reliable scrolling
     transitionDelay = 600, // Delay in ms for frame transition effect
     scrollPauseDelay = 0, // Set to 0 to disable scroll pausing
     minTimeBetweenTransitions = 500, // Minimum time between frame transitions
     enableSnapToFrame = false, // Disable snap-to-frame to allow free scrolling
-    scrollSnapThreshold = 0.2 // Threshold to determine when to snap (0.2 = 20% of the way to next frame)
+    scrollSnapThreshold = 0.01, // Threshold to determine when to snap (0.2 = 20% of the way to next frame)
+    // Can be a single number (same for all frames) or an array of numbers (one per frame)
+    scrollAnimationDuration = [100, 100, 100, 100, 100, 150] // Different durations per frame: fast-medium-slow-fast-medium-fast
   } = options;
+  
+  // Convert scrollAnimationDuration to array if it's a single number
+  const animationDurations = Array.isArray(scrollAnimationDuration) 
+    ? scrollAnimationDuration 
+    : framePositionMultipliers.map(() => scrollAnimationDuration);
   
   const [currentFrame, setCurrentFrame] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -25,6 +32,8 @@ export default function useFrameScrollAnimation(options = {}) {
   const isScrolling = useRef(false);
   const scrollTimeout = useRef(null);
   const targetFrameRef = useRef(null);
+  const wheelEventTimeout = useRef(null); // New ref for wheel event debouncing
+  const isProcessingWheel = useRef(false); // Flag to prevent multiple wheel events processing
 
   // Function to smoothly scroll to a specific position
   const scrollToPosition = (position, duration = 500) => {
@@ -63,6 +72,48 @@ export default function useFrameScrollAnimation(options = {}) {
     const framePosition = Math.round(framePositionMultipliers[frameIndex] * viewportHeight.current);
     scrollToPosition(framePosition);
     targetFrameRef.current = frameIndex;
+  };
+
+  // New function to handle individual wheel events
+  const handleWheelEvent = (event) => {
+    // Prevent processing if we're already handling a wheel event
+    if (isProcessingWheel.current) return;
+    isProcessingWheel.current = true;
+    
+    // Clear any existing timeout
+    if (wheelEventTimeout.current) {
+      clearTimeout(wheelEventTimeout.current);
+    }
+    
+    const now = Date.now();
+    const timeSinceLastFrameChange = now - lastFrameChangeTime.current;
+    
+    // Only process if enough time has passed since last frame change
+    if (timeSinceLastFrameChange > minTimeBetweenTransitions) {
+      // Determine direction (positive deltaY means scrolling down)
+      const direction = event.deltaY > 0 ? 1 : -1;
+      
+      // Calculate target frame
+      const targetFrame = Math.max(0, Math.min(framePositionMultipliers.length - 1, currentFrame + direction));
+      
+      // Only change frame if it's different
+      if (targetFrame !== currentFrame) {
+        // Get the animation duration for this specific frame
+        const duration = animationDurations[targetFrame] || 300; // Use frame-specific duration or default
+        
+        // Scroll to the target frame position
+        const framePosition = Math.round(framePositionMultipliers[targetFrame] * viewportHeight.current);
+        scrollToPosition(framePosition, duration);
+        
+        // Update the frame
+        handleFrameChange(targetFrame);
+      }
+    }
+    
+    // Reset the processing flag after a short delay
+    wheelEventTimeout.current = setTimeout(() => {
+      isProcessingWheel.current = false;
+    }, 200); // Debounce wheel events
   };
 
   const registerFrame = (index, element) => {
@@ -200,13 +251,6 @@ export default function useFrameScrollAnimation(options = {}) {
         const progress = (currentScrollY - currentFramePos) / (nextFramePos - currentFramePos);
         setTransitionProgress(Math.max(0, Math.min(1, progress)));
       }
-      
-      const now = Date.now();
-      const timeSinceLastFrameChange = now - lastFrameChangeTime.current;
-      
-      if (newFrameIndex !== currentFrame && timeSinceLastFrameChange > minTimeBetweenTransitions) {
-        handleFrameChange(newFrameIndex);
-      }
     };
 
     let ticking = false;
@@ -220,12 +264,15 @@ export default function useFrameScrollAnimation(options = {}) {
       }
     };
 
+    // Add wheel event listener for precise scroll detection
+    window.addEventListener('wheel', handleWheelEvent, { passive: false });
     window.addEventListener('scroll', handleScrollThrottled);
     window.addEventListener('resize', updateViewportHeight);
     
     handleScroll();
     
     return () => {
+      window.removeEventListener('wheel', handleWheelEvent);
       window.removeEventListener('scroll', handleScrollThrottled);
       window.removeEventListener('resize', updateViewportHeight);
       
@@ -241,6 +288,10 @@ export default function useFrameScrollAnimation(options = {}) {
       
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
+      }
+      
+      if (wheelEventTimeout.current) {
+        clearTimeout(wheelEventTimeout.current);
       }
     };
   }, [currentFrame, framePositionMultipliers, minTimeBetweenTransitions, scrollPauseDelay, transitionDelay, useIntersectionObserver, enableSnapToFrame, scrollSnapThreshold]);

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { captureEmail } from '../lib/supabase';
 
 const WaitlistPage = ({ isVisible }) => {
@@ -8,6 +8,20 @@ const WaitlistPage = ({ isVisible }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [opacity, setOpacity] = useState(0);
+
+  // Handle fade-in animation when the component becomes visible
+  useEffect(() => {
+    if (isVisible) {
+      // Slightly longer delay to ensure smooth transition after the text is shown
+      const timer = setTimeout(() => {
+        setOpacity(1);
+      }, 300);
+      return () => clearTimeout(timer);
+    } else {
+      setOpacity(0);
+    }
+  }, [isVisible]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,8 +55,9 @@ const WaitlistPage = ({ isVisible }) => {
         isVisible ? '' : 'pointer-events-none'
       }`}
       style={{
-        opacity: 1, // Always fully visible
-        display: isVisible ? 'flex' : 'none' // Use display instead of opacity for visibility
+        opacity: opacity,
+        transition: 'opacity 1s ease-in-out', // Longer, smoother transition
+        display: isVisible ? 'flex' : 'none'
       }}
     >
       <div className="max-w-3xl mx-auto w-full">
@@ -108,4 +123,3 @@ const WaitlistPage = ({ isVisible }) => {
 };
 
 export default WaitlistPage;
-

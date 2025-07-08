@@ -27,6 +27,7 @@ export default function Home() {
     
     // Handle the transition completion from the expanding circle
     const handleTransitionComplete = (isComplete) => {
+        // Directly show the waitlist page after circle expansion
         setShowWaitlist(isComplete);
     };
 

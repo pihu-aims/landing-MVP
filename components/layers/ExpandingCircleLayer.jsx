@@ -6,9 +6,6 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
 
   let scale = 0;
 
-  // Remove opacity variable and always maintain full opacity
-
-
   // Trigger the callback when the circle has fully expanded
   useEffect(() => {
     if (isActive && transitionProgress > 0.6) {
@@ -22,17 +19,12 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
     // Scale rapidly from 0 to 0.5 progress, then maintain full scale
     if (transitionProgress <= 0.5) {
       scale = transitionProgress * 2 * 250; // Max scale of 250 at 0.5 progress
-
-      // Remove opacity transition
     } else {
       scale = 250; // Maintain full scale
-      // Remove opacity transition
-
     }
   }
 
   return (
-
     <>
       <div
         className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white`}
@@ -59,7 +51,6 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
         </div>
       )}
     </>
-
   );
 };
 

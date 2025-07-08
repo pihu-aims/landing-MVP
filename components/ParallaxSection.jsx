@@ -29,10 +29,21 @@ export default function ParallaxSection() {
     offset: ["start end", "end start"] // Start tracking when container enters viewport, end when it leaves
   });
 
-  // Transform values for each layer - adjust percentages to control movement speed
-  const backgroundY1 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]); // First background - very slow
-  const backgroundY2 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]); // Second background - slow
-  const backgroundY3 = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]); // Third background - medium slow
+  // Create dynamic transform values based on current frame
+  // This will make backgrounds move faster after frame 2
+  const getBackgroundTransform = (baseSpeed) => {
+    // Use scrollYProgress as input and apply different speeds based on currentFrame
+    return useTransform(scrollYProgress, [0, 1], [
+      "0%", 
+      // Increase movement speed by multiplier after frame 2
+      `${currentFrame >= 2 ? baseSpeed * 2 : baseSpeed}%`
+    ]);
+  };
+
+  // Dynamic background movement speeds that update when currentFrame changes
+  const backgroundY1 = getBackgroundTransform(20); // First background - adjusts based on frame
+  const backgroundY2 = getBackgroundTransform(30); // Second background - adjusts based on frame
+  const backgroundY3 = getBackgroundTransform(25); // Third background - adjusts based on frame
 
   // Determine which background layer should be visible based on the current frame
   const showBackgroundOne = currentFrame < 2; // Show background one for frames 0 and 1
