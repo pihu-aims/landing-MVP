@@ -54,9 +54,9 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 50,
       positionPercentLeft: 30,
-      maxWidth: 40,
-      prefWidth: 35,
-      minWidth: 30,
+      maxWidth: 50,
+      prefWidth: 40,
+      minWidth: 35,
     },
     {
       id: "what-we-built",
