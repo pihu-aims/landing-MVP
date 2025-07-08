@@ -104,3 +104,4 @@ const WaitlistPage = ({ isVisible }) => {
 };
 
 export default WaitlistPage;
+
