@@ -39,7 +39,7 @@ export default function Home() {
             <div
                 className="fixed top-0 left-0 w-full h-full z-0"
                 style={{
-                    transform: `translateY(-${textOffset}vw)`,
+                    transform: `translateY(-${textOffset }vh)`,
                     transition: isFrameTransition ? 'transform 1.6s ease-out' : 'transform 0.2s linear',
                     opacity: 1 // Ensure backgrounds are always fully visible
 
