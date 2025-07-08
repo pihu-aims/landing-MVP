@@ -36,7 +36,7 @@ export default function ImagesLayer() {
       alt: "Image A - Our Vision",
       positionPercentTop: 50,  //down from viewport top
       positionPercentLeft: 70, //from left edge
-      scale: 1.4, // The scale is the scale from the image resolution (in terms of pixels)
+      scale: 1.9, // The scale is the scale from the image resolution (in terms of pixels)
       width: 475,              // px (optional)
       frame: 1, // which frame it appears on
     },
@@ -54,7 +54,9 @@ export default function ImagesLayer() {
       id: "image-c",
       src: "/images/c.png",
       alt: "Image C - Who It's For",
-      positionPercentTop: 30,
+
+      positionPercentTop: 40,
+
       positionPercentLeft: 80,
       scale: 1.5,
       width: 380,
@@ -108,7 +110,8 @@ export default function ImagesLayer() {
               scale(${image.scale * (scaleMultiplier * 0.80) || 1})        /* Scale the image */
               ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
             `,
-                  opacity: currentFrame === (image.frame-1) ? 1 : 0,
+                  opacity: 1,
+                  //opacity: currentFrame === (image.frame-1) ? 1 : 0.5,
                   transition: isFrameTransition
                       ? frameTransitionAnimationTrue
                       : frameTransitionAnimationFalse,

@@ -33,7 +33,7 @@ export default function TopBar() {
             <img
                 className="w-8 h-8 mr-2"
                 alt="Studio1 Logo"
-                src="/images/a.png"
+                src="/images/logo.png"
             />
             <span className="text-white font-bold">Studio1.ai</span>
         </div>

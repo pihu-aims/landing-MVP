@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgress, onTransitionComplete }) => {
   //   This logic is currently shaky, had to add a 7th frame to make sure the transition completes
-  const isActive = currentFrame >= 5; // This layer is active on the 6th frame (index 5)
+  const isActive = currentFrame >= 4; // This layer is active on the 6th frame (index 5)
 
   let scale = 0;
 

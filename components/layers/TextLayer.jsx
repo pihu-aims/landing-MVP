@@ -15,13 +15,13 @@ export default function TextLayer() {
 
 
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 1, 2, 3,4,5], // Default: frames at 0, 1x, 2x, and 3x viewport height
-    useIntersectionObserver: true,
+    framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0], // Match the updated positions in useFrameScrollAnimation
+    useIntersectionObserver: false, // Disable intersection observer to match hook
     transitionDelay: 600,
     scrollPauseDelay: 400,
     minTimeBetweenTransitions: 500,
-    enableSnapToFrame: true,
-    scrollSnapThreshold: 0.3
+    enableSnapToFrame: false, // Disable snap-to-frame to match hook
+    scrollSnapThreshold: 0.2
   });
 
   // Navigation menu items
@@ -39,7 +39,9 @@ export default function TextLayer() {
     {
       id: "studio1",
       title: "Studio1",
+
       subtitle: "Let's Create",
+
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
           "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
@@ -82,8 +84,10 @@ export default function TextLayer() {
       descriptionColor: "text-white",
       height: "h-screen",
       // Alignment variables
-      positionPercentTop: 25,
-      positionPercentLeft: 35,
+
+      positionPercentTop: 40,
+      positionPercentLeft: 30,
+
     },
     {
       id: "who-we-are",
@@ -131,7 +135,9 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 2, 3,4,5]
+      framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0],
+      useIntersectionObserver: false,
+      enableSnapToFrame: false
     }));
   }, []);
 
@@ -181,9 +187,10 @@ export default function TextLayer() {
                       left: `${section.positionPercentLeft || 0}vw`,      // Horizontal center position
                       transform: `translate(-50%, -50%)          
                         ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}`,
-                      opacity: Math.abs(currentFrame - index) <= 1
-                          ? 1 - Math.abs(currentFrame - index) * 0.3
-                          : 0.4,
+                      opacity: 1,
+                      //opacity: Math.abs(currentFrame - index) <= 1
+                          //? 1 - Math.abs(currentFrame - index) * 0.3
+                          //: 0.4,
                       transition: isFrameTransition
                           ? frameTransitionAnimationTrue
                           : frameTranstionAnimationFalse,

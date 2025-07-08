@@ -4,13 +4,13 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function useFrameScrollAnimation(options = {}) {
   const {
-    framePositionMultipliers = [0, 1, 2, 3, 4, 5, 6], // Default: frames at 0, 1x, 2x, 3x, 4x, 5x, and 6x viewport height
-    useIntersectionObserver = true, // Whether to use IntersectionObserver for more reliable frame detection
+    framePositionMultipliers = [0, 1, 5.0, 8.0, 11.0, 12.0], // Modified: Much larger gaps between later frames
+    useIntersectionObserver = false, // Disable intersection observer for more reliable scrolling
     transitionDelay = 600, // Delay in ms for frame transition effect
     scrollPauseDelay = 0, // Set to 0 to disable scroll pausing
     minTimeBetweenTransitions = 500, // Minimum time between frame transitions
-    enableSnapToFrame = false, // Disable snap-to-frame by default
-    scrollSnapThreshold = 0.3 // Threshold to determine when to snap (0.3 = 30% of the way to next frame)
+    enableSnapToFrame = false, // Disable snap-to-frame to allow free scrolling
+    scrollSnapThreshold = 0.2 // Threshold to determine when to snap (0.2 = 20% of the way to next frame)
   } = options;
   
   const [currentFrame, setCurrentFrame] = useState(0);
@@ -32,6 +32,10 @@ export default function useFrameScrollAnimation(options = {}) {
     
     const start = window.scrollY;
     const change = position - start;
+    
+    // Prevent unnecessary scrolling if we're very close to the target
+    if (Math.abs(change) < 10) return;
+    
     const startTime = performance.now();
     
     function animateScroll(currentTime) {
@@ -52,6 +56,9 @@ export default function useFrameScrollAnimation(options = {}) {
   // Function to scroll to a specific frame
   const scrollToFrame = (frameIndex) => {
     if (frameIndex < 0 || frameIndex >= framePositionMultipliers.length) return;
+    
+    // Don't scroll if we're already at or very near this frame
+    if (Math.abs(currentFrame - frameIndex) < 0.1) return;
     
     const framePosition = Math.round(framePositionMultipliers[frameIndex] * viewportHeight.current);
     scrollToPosition(framePosition);
@@ -128,17 +135,21 @@ export default function useFrameScrollAnimation(options = {}) {
       }
     }
     
-    // If we're between frames and past the threshold, snap to the appropriate frame
-    if (closestFrameIndex < framePositions.length - 1) {
-      const currentFramePos = framePositions[closestFrameIndex];
-      const nextFramePos = framePositions[closestFrameIndex + 1];
-      const progress = (scrollY - currentFramePos) / (nextFramePos - currentFramePos);
-      
-      if (progress > scrollSnapThreshold && progress < (1 - scrollSnapThreshold)) {
-        // We're in the middle zone between frames, snap to the closest one
-        const targetFrame = progress < 0.5 ? closestFrameIndex : closestFrameIndex + 1;
-        // Don't automatically scroll - just update the frame
-        setCurrentFrame(targetFrame);
+    // Only snap if we're significantly off from a frame position
+    // This prevents unnecessary bouncing
+    if (minDistance > (viewportHeight.current * 0.05)) {
+      // If we're between frames and past the threshold, snap to the appropriate frame
+      if (closestFrameIndex < framePositions.length - 1) {
+        const currentFramePos = framePositions[closestFrameIndex];
+        const nextFramePos = framePositions[closestFrameIndex + 1];
+        const progress = (scrollY - currentFramePos) / (nextFramePos - currentFramePos);
+        
+        if (progress > scrollSnapThreshold && progress < (1 - scrollSnapThreshold)) {
+          // We're in the middle zone between frames, snap to the closest one
+          const targetFrame = progress < 0.5 ? closestFrameIndex : closestFrameIndex + 1;
+          // Don't automatically scroll - just update the frame
+          setCurrentFrame(targetFrame);
+        }
       }
     }
   };
@@ -165,6 +176,7 @@ export default function useFrameScrollAnimation(options = {}) {
       // Set a timeout to detect when scrolling stops
       scrollTimeout.current = setTimeout(handleScrollStop, 150);
       
+      // Skip intersection observer logic if disabled
       if (useIntersectionObserver && observersRef.current.length > 0) {
         return;
       }
@@ -175,7 +187,7 @@ export default function useFrameScrollAnimation(options = {}) {
       
       let newFrameIndex = 0;
       for (let i = 0; i < framePositions.length; i++) {
-        if (currentScrollY >= framePositions[i] - (viewportHeight.current * 0.1)) {
+        if (currentScrollY >= framePositions[i] - (viewportHeight.current * 0.3)) {
           newFrameIndex = i;
         } else {
           break;
