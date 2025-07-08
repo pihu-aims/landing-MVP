@@ -37,6 +37,7 @@ export default function Home() {
                 style={{
                     transform: `translateY(-${scrollY * 0.4}px)`,
                     transition: isFrameTransition ? 'transform 1.6s ease-out' : 'transform 0.2s linear',
+                    opacity: 1 // Ensure backgrounds are always fully visible
                 }}
             >
                 <BackgroundLayerOne />
@@ -55,17 +56,19 @@ export default function Home() {
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
                     transition: isFrameTransition ? 'transform 1.2s ease-out' : 'none',
+                    opacity: 1 // Ensure text is always fully visible
                 }}
             >
                 <TextLayer />
             </div>
 
-            {/* Text Layer - frame based, no scroll dependency */}
+            {/* Images Layer - frame based, no scroll dependency */}
             <div
                 className="fixed top-0 left-0 w-full z-20"
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
                     transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none',
+                    opacity: 1 // Ensure images are always fully visible
                 }}
             >
                 <ImagesLayer />
@@ -75,7 +78,7 @@ export default function Home() {
             {/* Frame indicator (optional) */}
             {/*Hide in production!!!!!!!!!!!*/}
             {isFrameTransition && (
-                <div className="fixed bottom-8 right-8 bg-black/60 text-white px-4 py-2 rounded-full z-40 transition-opacity duration-300">
+                <div className="fixed bottom-8 right-8 bg-black/60 text-white px-4 py-2 rounded-full z-40">
                     Frame {currentFrame + 1}
                 </div>
             )}

@@ -3,9 +3,13 @@ import React from 'react';
 const WaitlistPage = ({ isVisible }) => {
   return (
     <div 
-      className={`fixed inset-0 bg-white z-60 flex flex-col items-center justify-start pt-12 px-4 overflow-auto transition-opacity duration-500 ${
-        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      className={`fixed inset-0 bg-white z-60 flex flex-col items-center justify-start pt-12 px-4 overflow-auto ${
+        isVisible ? '' : 'pointer-events-none'
       }`}
+      style={{
+        opacity: 1, // Always fully visible
+        display: isVisible ? 'flex' : 'none' // Use display instead of opacity for visibility
+      }}
     >
       <div className="max-w-3xl mx-auto w-full">
         {/* Video Placeholder */}
