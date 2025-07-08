@@ -15,13 +15,13 @@ export default function TextLayer() {
 
 
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 1, 2, 3,4,5], // Default: frames at 0, 1x, 2x, and 3x viewport height
-    useIntersectionObserver: true,
+    framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0], // Match the updated positions in useFrameScrollAnimation
+    useIntersectionObserver: false, // Disable intersection observer to match hook
     transitionDelay: 600,
     scrollPauseDelay: 400,
     minTimeBetweenTransitions: 500,
-    enableSnapToFrame: true,
-    scrollSnapThreshold: 0.3
+    enableSnapToFrame: false, // Disable snap-to-frame to match hook
+    scrollSnapThreshold: 0.2
   });
 
   // Navigation menu items
@@ -132,7 +132,9 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 2, 3,4,5]
+      framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0],
+      useIntersectionObserver: false,
+      enableSnapToFrame: false
     }));
   }, []);
 
