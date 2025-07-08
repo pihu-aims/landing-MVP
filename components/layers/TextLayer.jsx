@@ -15,7 +15,7 @@ export default function TextLayer() {
 
 
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 0.5, 5.0, 8.0, 11.0, 15.0], // Match the updated positions in useFrameScrollAnimation
+    framePositionMultipliers: [0, 0.5, 5.0, 8.0, 12.0, 15.0], // Match the updated positions in useFrameScrollAnimation
     useIntersectionObserver: false, // Disable intersection observer to match hook
     transitionDelay: 600,
     scrollPauseDelay: 400,
@@ -148,7 +148,7 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 0.5, 5.0, 8.0, 11.0, 15.0],
+      framePositionMultipliers: [0, 0.5, 5.0, 8.0, 12.0, 15.0],
       useIntersectionObserver: false,
       enableSnapToFrame: false
     }));
