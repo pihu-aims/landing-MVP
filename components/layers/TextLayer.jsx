@@ -51,7 +51,7 @@ export default function TextLayer() {
       height: "h-screen",
       // Alignment variables
       positionPercentTop: 50,
-      positionPercentLeft: 35
+      positionPercentLeft: 35,
     },
     {
       id: "what-we-built",
@@ -191,36 +191,71 @@ export default function TextLayer() {
                     }}
                 >
 
-                <h2
-                      className={`text-5xl font-bold mb-4 ${section.titleColor}`}
+                {index === 0 ? (
+                  <>
+                    <h2
+                      className={`text-7xl mb-1 ${section.titleColor}`}
                       style={{
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                        fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                        fontWeight: "700"
                       }}
+                    >
+                      {section.title}
+                    </h2>
+                  </>
+                ) : (
+                  <h2
+                    className={`text-5xl font-bold mb-4 ${section.titleColor}`}
+                    style={{
+                      transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                      fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
+                    }}
                   >
                     {section.title}
                   </h2>
-                  <h3
-                      className={`text-3xl font-bold mb-6 ${section.subTitleColor}`}
+                )}
+                  {index === 0 ? (
+                    <h3
+                      className={`text-6xl mb-6 ${section.subTitleColor}`}
                       style={{
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                        fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                        fontWeight: "600",
+                        marginTop: "-8px"
                       }}
-                  >
-                    {section.subtitle}
-                  </h3>
+                    >
+                      {section.subtitle}
+                    </h3>
+                  ) : (
+                    <h3
+                      className={`text-4xl mb-2 ${section.subTitleColor}`}
+                      style={{
+                        transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                        fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
+                      }}
+                    >
+                      {section.subtitle}
+                    </h3>
+                  )}
                   {index === 0 ? (
                       <>
                         <p
-                            className={`text-xl whitespace-pre-line ${section.headingColor}`}
+                            className={`text-2xl whitespace-pre-line ${section.headingColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              marginBottom: "8px",
+                              fontWeight: "600"
                             }}
                         >
                           {section.heading}
                         </p>
                         <p
-                            className={`text-xl mt-6 whitespace-pre-line ${section.descriptionColor}`}
+                            className={`text-base mt-1 whitespace-pre-line ${section.descriptionColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
                             }}
                         >
                           {section.description}
@@ -231,6 +266,7 @@ export default function TextLayer() {
                           className={`text-xl whitespace-pre-line ${section.descriptionColor}`}
                           style={{
                             transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                            fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
                           }}
                       >
                         {section.description}

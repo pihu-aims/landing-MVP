@@ -59,6 +59,7 @@ export default function TopBar() {
         <Button
             variant="outline"
             className="bg-white text-black/75 px-4 py-2 rounded-md"
+            suppressHydrationWarning
         >
             Get Started
         </Button>
