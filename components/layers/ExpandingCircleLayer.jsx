@@ -15,9 +15,9 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
 
     if (isActive) {
         if (transitionProgress <= 0.5) {
-            scale = transitionProgress * 2 * 250;
+            scale = transitionProgress * 2 * 500;
         } else {
-            scale = 250;
+            scale = 500;
         }
     }
 
