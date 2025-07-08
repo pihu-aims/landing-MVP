@@ -71,11 +71,11 @@ export default function TextLayer() {
       descriptionColor: "text-white",
       height: "h-screen",
       // Alignment variables
-      positionPercentTop: 66.5,
-      positionPercentLeft: 70,
-      maxWidth: 45,
-      prefWidth: 37,
-      minWidth: 30,
+      positionPercentTop: 63,
+      positionPercentLeft: 65,
+      maxWidth: 65,
+      prefWidth: 65,
+      minWidth: 65,
     },
     {
       id: "who-its-for",
@@ -327,7 +327,7 @@ export default function TextLayer() {
                   ) : index === 1 ? (
                       <div>
                         <h2
-                            className={`text-5xl font-bold mb-2 ${section.titleColor}`}
+                            className={`text-7xl font-bold mb-2 ${section.titleColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
@@ -338,7 +338,7 @@ export default function TextLayer() {
                           {section.title}
                         </h2>
                         <h3
-                            className={`text-2xl mb-4 ${section.subTitleColor}`}
+                            className={`text-3xl mb-4 ${section.subTitleColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
