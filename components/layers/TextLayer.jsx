@@ -15,7 +15,7 @@ export default function TextLayer() {
 
 
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0], // Match the updated positions in useFrameScrollAnimation
+    framePositionMultipliers: [0, 0.5, 5.0, 8.0, 12.0, 15.0], // Match the updated positions in useFrameScrollAnimation
     useIntersectionObserver: false, // Disable intersection observer to match hook
     transitionDelay: 600,
     scrollPauseDelay: 400,
@@ -54,9 +54,9 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 50,
       positionPercentLeft: 30,
-      maxWidth: 40,
-      prefWidth: 35,
-      minWidth: 30,
+      maxWidth: 50,
+      prefWidth: 40,
+      minWidth: 35,
     },
     {
       id: "what-we-built",
@@ -148,7 +148,7 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0],
+      framePositionMultipliers: [0, 0.5, 5.0, 8.0, 12.0, 15.0],
       useIntersectionObserver: false,
       enableSnapToFrame: false
     }));
@@ -266,7 +266,7 @@ export default function TextLayer() {
                   {index === 0 ? (
                       <>
                         <p
-                            className={`text-2xl whitespace-pre-line ${section.headingColor}`}
+                            className={`text-3xl whitespace-pre-line ${section.headingColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
@@ -277,7 +277,7 @@ export default function TextLayer() {
                           {section.heading}
                         </p>
                         <p
-                            className={`text-base mt-1 whitespace-pre-line ${section.descriptionColor}`}
+                            className={`text-xl mt-1 whitespace-pre-line ${section.descriptionColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
@@ -300,7 +300,7 @@ export default function TextLayer() {
                           {section.title}
                         </h2>
                         <h3
-                            className={`text-xl mb-4 ${section.subTitleColor}`}
+                            className={`text-2xl mb-4 ${section.subTitleColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
@@ -311,7 +311,7 @@ export default function TextLayer() {
                           {section.subtitle}
                         </h3>
                         <p
-                            className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
+                            className={`text-base whitespace-pre-line ${section.descriptionColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",

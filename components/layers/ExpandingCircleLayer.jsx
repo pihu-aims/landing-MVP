@@ -55,7 +55,15 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
             opacity: 1, // Always fully visible
           }}
         >
-          <h1 className="text-4xl font-bold text-white">Let The Story Begin</h1>
+          <h1 className="text-7xl font-bold text-white">Let The Story Begin</h1>
+          <div
+            className="absolute top-0 left-0 w-full h-full"
+            style={{
+              clipPath: `circle(${scale * 4}px at center)`,
+            }}
+          >
+            <h1 className="text-7xl font-bold text-black">Let The Story Begin</h1>
+          </div>
         </div>
       )}
     </>
