@@ -42,11 +42,19 @@ const WaitlistPage = ({ isVisible }) => {
       }`}
     >
       <div className="max-w-3xl mx-auto w-full">
-        {/* Video Placeholder */}
-        <div className="w-full aspect-video bg-gray-200 rounded-lg mb-8 flex items-center justify-center">
-          <div className="h-14 w-14 rounded-full border-2 border-gray-700 flex items-center justify-center">
-            <div className="ml-1 w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-gray-700 border-b-8 border-b-transparent"></div>
-          </div>
+        {/* Video */}
+        <div className="w-full aspect-video mb-8 rounded-lg overflow-hidden">
+          <video 
+            className="w-full h-full object-cover"
+            controls
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+           <source src="/videos/cl.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
         
         {/* Heading */}
