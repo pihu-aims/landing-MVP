@@ -54,7 +54,9 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 50,
       positionPercentLeft: 30,
-      maxWidth: 50
+      maxWidth: 40,
+      prefWidth: 35,
+      minWidth: 30,
     },
     {
       id: "what-we-built",
@@ -71,7 +73,9 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 66.5,
       positionPercentLeft: 70,
-      maxWidth: 45
+      maxWidth: 45,
+      prefWidth: 37,
+      minWidth: 30,
     },
     {
       id: "who-its-for",
@@ -89,7 +93,9 @@ export default function TextLayer() {
 
       positionPercentTop: 20,
       positionPercentLeft: 35,
-      maxWidth: 50
+      maxWidth: 50,
+      prefWidth: 40,
+      minWidth: 30,
 
     },
     {
@@ -107,7 +113,9 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 60,
       positionPercentLeft: 70,
-      maxWidth: 30
+      maxWidth: 30,
+      prefWidth: 27,
+      minWidth: 25,
     },
     // {
     //   id: "get-started",
@@ -203,7 +211,7 @@ export default function TextLayer() {
                       transition: isFrameTransition
                           ? frameTransitionAnimationTrue
                           : frameTranstionAnimationFalse,
-                      maxWidth: `${section.maxWidth || 60}vh`, // 👈 Max width as % of viewport height
+                      maxWidth: `clamp(${section.minWidth || 30}vh, ${section.prefWidth || 50}vh, ${section.maxWidth || 80}vh)`, // 👈 Max width as % of viewport height
                     }
                 }
                 >
