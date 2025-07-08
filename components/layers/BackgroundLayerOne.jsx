@@ -11,7 +11,7 @@ export default function BackgroundLayerOne() {
         src="/images/thumbnail-3-3.png"
         loading="eager"
       />
-      <div className="absolute bottom-0 left-0 w-full h-[16px] bg-black" />
+      <div className="absolute bottom-0 left-0 w-full h-[16px] bg-transparent" />
     </div>
   );
 }
