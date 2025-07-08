@@ -83,7 +83,7 @@ export default function TextLayer() {
       descriptionColor: "text-white",
       height: "h-screen",
       // Alignment variables
-      positionPercentTop: 25,
+      positionPercentTop: 40,
       positionPercentLeft: 30,
     },
     {
@@ -132,7 +132,7 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0],
+      framePositionMultipliers: [0, 1, 3.0, 4.5, 7.0, 9.0], // Reduced gap between frames 2 and 3
       useIntersectionObserver: false,
       enableSnapToFrame: false
     }));

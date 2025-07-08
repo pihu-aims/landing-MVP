@@ -54,7 +54,7 @@ export default function ImagesLayer() {
       id: "image-c",
       src: "/images/c.png",
       alt: "Image C - Who It's For",
-      positionPercentTop: 25,
+      positionPercentTop: 40,
       positionPercentLeft: 80,
       scale: 1.35,
       width: 350,

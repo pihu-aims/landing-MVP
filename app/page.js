@@ -14,11 +14,11 @@ import WaitlistPage from "@/components/WaitlistPage";
 
 export default function Home() {
     const { scrollY, currentFrame, isFrameTransition, transitionProgress } = useFrameScrollAnimation();
-    const [contentHeight, setContentHeight] = useState('700vh'); // For 7 frames
+    const [contentHeight, setContentHeight] = useState('1600vh'); // For 7 frames
     const [showWaitlist, setShowWaitlist] = useState(false);
 
     useEffect(() => {
-        setContentHeight(`700vh`); // Adjust height if frames change
+        setContentHeight(`1600vh`); // Adjust height if frames change
     }, []);
 
     const textOffset = currentFrame * 100; // Each frame = 100vh apart

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function useFrameScrollAnimation(options = {}) {
   const {
-    framePositionMultipliers = [0, 1, 5.0, 8.0, 11.0, 15.0], // Modified: Much larger gaps between later frames
+    framePositionMultipliers = [0, 1, 5.0, 8.0, 11.0, 12.0], // Modified: Much larger gaps between later frames
     useIntersectionObserver = false, // Disable intersection observer for more reliable scrolling
     transitionDelay = 600, // Delay in ms for frame transition effect
     scrollPauseDelay = 0, // Set to 0 to disable scroll pausing
