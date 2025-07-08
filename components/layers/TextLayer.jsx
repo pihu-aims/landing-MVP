@@ -15,7 +15,7 @@ export default function TextLayer() {
 
 
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 0.5, 5.0, 8.0, 12.0, 15.0], // Match the updated positions in useFrameScrollAnimation
+    framePositionMultipliers: [0, 2 , 5.0, 8.0, 12.0, 16.0], // Match the updated positions in useFrameScrollAnimation
     useIntersectionObserver: false, // Disable intersection observer to match hook
     transitionDelay: 600,
     scrollPauseDelay: 400,
@@ -117,6 +117,44 @@ export default function TextLayer() {
       prefWidth: 27,
       minWidth: 25,
     },
+    {
+      id: "spacer-frame",
+      title: "",
+      subtitle: "",
+      description: "",
+      bgColor: "bg-transparent",
+      titleColor: "text-white",
+      subTitleColor: "text-white",
+      headingColor: "text-white",
+      descriptionColor: "text-white",
+      height: "h-screen",
+      // Alignment variables - position off-screen so it’s not visible
+      positionPercentTop: -100,
+      positionPercentLeft: -100,
+      maxWidth: 0,
+      prefWidth: 0,
+      minWidth: 0,
+    },
+    {
+      id: "spacer-frame2",
+      title: "",
+      subtitle: "",
+      description: "",
+      bgColor: "bg-transparent",
+      titleColor: "text-white",
+      subTitleColor: "text-white",
+      headingColor: "text-white",
+      descriptionColor: "text-white",
+      height: "h-screen",
+      // Alignment variables - position off-screen so it’s not visible
+      positionPercentTop: -100,
+      positionPercentLeft: -100,
+      maxWidth: 0,
+      prefWidth: 0,
+      minWidth: 0,
+    }
+
+
     // {
     //   id: "get-started",
     //   title: "Get Started",
@@ -148,7 +186,7 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 0.5, 5.0, 8.0, 12.0, 15.0],
+      framePositionMultipliers: [0, 2 , 5.0, 8.0, 12.0, 16.0],
       useIntersectionObserver: false,
       enableSnapToFrame: false
     }));

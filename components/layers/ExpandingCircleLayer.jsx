@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgress, onTransitionComplete }) => {
-    const isActive = currentFrame >= 4;
+    const isActive = currentFrame >= 4 && currentFrame <= 6;
 
     let scale = 0;
 
