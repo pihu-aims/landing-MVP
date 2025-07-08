@@ -31,11 +31,11 @@ export default function TopBar() {
         {/* Logo */}
         <div className="flex items-center ">
             <img
-                className="w-8 h-8 mr-2"
+                className=" mr-2"
                 alt="Studio1 Logo"
                 src="/images/logo.png"
             />
-            <span className="text-white font-bold">Studio1.ai</span>
+            <span className="text-white font-bold"></span>
         </div>
 
         {/* Navigation Tabs */}

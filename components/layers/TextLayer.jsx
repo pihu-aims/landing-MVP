@@ -52,11 +52,11 @@ export default function TextLayer() {
       descriptionColor: "text-black",
       height: "h-screen",
       // Alignment variables
-      positionPercentTop: 50,
+      positionPercentTop: 49.5,
       positionPercentLeft: 30,
-      maxWidth: 50,
-      prefWidth: 40,
-      minWidth: 35,
+      maxWidth: 60,
+      prefWidth: 60,
+      minWidth: 60,
     },
     {
       id: "what-we-built",
@@ -257,7 +257,7 @@ export default function TextLayer() {
                 {index === 0 ? (
                   <>
                     <h2
-                      className={`text-7xl mb-1 ${section.titleColor}`}
+                      className={`text-8xl mb-1 ${section.titleColor}`}
                       style={{
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                         fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
@@ -280,11 +280,11 @@ export default function TextLayer() {
                 ) : null}
                   {index === 0 ? (
                     <h3
-                      className={`text-6xl mb-6 ${section.subTitleColor}`}
+                      className={`text-7xl mb-6 ${section.subTitleColor}`}
                       style={{
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                         fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
-                        fontWeight: "600",
+                        fontWeight: "500",
                         marginTop: "-8px"
                       }}
                     >
