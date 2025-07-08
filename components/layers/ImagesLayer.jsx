@@ -108,7 +108,7 @@ export default function ImagesLayer() {
               scale(${image.scale * (scaleMultiplier * 0.80) || 1})        /* Scale the image */
               ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
             `,
-                  opacity: currentFrame === (image.frame-1) ? 1 : 0,
+                  opacity: 1,
                   transition: isFrameTransition
                       ? frameTransitionAnimationTrue
                       : frameTransitionAnimationFalse,

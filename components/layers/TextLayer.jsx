@@ -15,7 +15,7 @@ export default function TextLayer() {
 
 
   const [frameConfig, setFrameConfig] = useState({
-    framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0], // Match the updated positions in useFrameScrollAnimation
+    framePositionMultipliers: [0, 1,2,3,4,5], // Match the updated positions in useFrameScrollAnimation
     useIntersectionObserver: false, // Disable intersection observer to match hook
     transitionDelay: 600,
     scrollPauseDelay: 400,
@@ -132,7 +132,7 @@ export default function TextLayer() {
     setIsClient(true);
     setFrameConfig(prev => ({
       ...prev,
-      framePositionMultipliers: [0, 1, 5.0, 8.0, 11.0, 15.0],
+      framePositionMultipliers: [0, 1, 2,3,4,5],
       useIntersectionObserver: false,
       enableSnapToFrame: false
     }));
@@ -184,9 +184,9 @@ export default function TextLayer() {
                       left: `${section.positionPercentLeft || 0}vw`,      // Horizontal center position
                       transform: `translate(-50%, -50%)          
                         ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}`,
-                      opacity: Math.abs(currentFrame - index) <= 1
-                          ? 1 - Math.abs(currentFrame - index) * 0.3
-                          : 0.4,
+                      // opacity: Math.abs(currentFrame - index) <= 1
+                      //     ? 1 - Math.abs(currentFrame - index) * 0.3
+                      //     : 0.4,
                       transition: isFrameTransition
                           ? frameTransitionAnimationTrue
                           : frameTranstionAnimationFalse,
