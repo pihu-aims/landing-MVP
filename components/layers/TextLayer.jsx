@@ -92,10 +92,10 @@ export default function TextLayer() {
       // Alignment variables
 
       positionPercentTop: 20,
-      positionPercentLeft: 35,
-      maxWidth: 50,
-      prefWidth: 40,
-      minWidth: 30,
+      positionPercentLeft: 28,
+      maxWidth: 60,
+      prefWidth: 60,
+      minWidth: 60,
 
     },
     {
@@ -362,18 +362,18 @@ export default function TextLayer() {
                   ) : index === 2 ? (
                       <div>
                         <h2
-                            className={`text-5xl font-bold mb-2 ${section.titleColor}`}
+                            className={`text-7xl font-bold mb-2 ${section.titleColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
-                              fontWeight: "700",
+                              fontWeight: "600",
                               marginBottom: "24px"
                             }}
                         >
                           {section.title}
                         </h2>
                         <h3
-                            className={`text-xl mb-4 ${section.subTitleColor}`}
+                            className={`text-2xl mb-4 ${section.subTitleColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
@@ -384,7 +384,7 @@ export default function TextLayer() {
                           {section.subtitle}
                         </h3>
                         <p
-                            className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
+                            className={`text-base whitespace-pre-line ${section.descriptionColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",

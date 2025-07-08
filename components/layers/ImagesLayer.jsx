@@ -55,9 +55,8 @@ export default function ImagesLayer() {
       src: "/images/c.png",
       alt: "Image C - Who It's For",
 
-      positionPercentTop: 40,
-
-      positionPercentLeft: 80,
+      positionPercentTop: 28,
+      positionPercentLeft: 85,
       scale: 1.5,
       width: 380,
       frame: 3,
@@ -67,7 +66,7 @@ export default function ImagesLayer() {
       src: "/images/d.png",
       alt: "Image D - Who We Are",
       positionPercentTop: 70,
-      positionPercentLeft: 20,
+      positionPercentLeft: 17,
       scale: 1.5,
       width: 410,
       frame: 3,
