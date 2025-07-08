@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { supabase } from '../lib/supabase'
+import { captureEmail } from '../lib/supabase'
 
 export default function EmailCapture() {
   const [isLoading, setIsLoading] = useState(false)
@@ -16,16 +16,10 @@ export default function EmailCapture() {
     setError('')
 
     try {   
-      const { error } = await supabase
-        .from('waitlist')
-        .insert([{ email: data.email }])
+      const { success, error: apiError } = await captureEmail(data.email)
 
-      if (error) {
-        if (error.code === '23505') {
-          setError('Email already registered!')
-        } else {
-          setError('Something went wrong. Please try again.')
-        }
+      if (!success) {
+        setError(apiError || 'Something went wrong. Please try again.')
       } else {
         setIsSuccess(true)
         reset()
