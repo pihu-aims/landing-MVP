@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import ImagesLayer from "@/components/layers/ImagesLayer";
 import ExpandingCircleLayer from "@/components/layers/ExpandingCircleLayer";
 import WaitlistPage from "@/components/WaitlistPage";
+import ParallaxSection from "@/components/ParallaxSection";
 
 export default function Home() {
     const { scrollY, currentFrame, isFrameTransition, transitionProgress } = useFrameScrollAnimation();
@@ -37,7 +38,7 @@ export default function Home() {
             <div
                 className="fixed top-0 left-0 w-full h-full z-0"
                 style={{
-                    transform: `translateY(-${scrollY * 0.4}px)`,
+                    transform: `translateY(-${textOffset * 14.9}px)`,
                     transition: isFrameTransition ? 'transform 1.6s ease-out' : 'transform 0.2s linear',
                     opacity: 1 // Ensure backgrounds are always fully visible
 
@@ -73,7 +74,7 @@ export default function Home() {
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
 
-                    transition: isFrameTransition ? 'transform 0.8s ease-out' : 'none',
+                    transition: isFrameTransition ? 'transform 0.8s ease-out 0.4s' : 'none',
                     opacity: 1 // Ensure images are always fully visible
 
                 }}
@@ -91,15 +92,15 @@ export default function Home() {
             )}
 
             {/* Expanding Circle Layer */}
-            <ExpandingCircleLayer 
-                currentFrame={currentFrame} 
-                isFrameTransition={isFrameTransition} 
-                transitionProgress={transitionProgress} 
+            <ExpandingCircleLayer
+                currentFrame={currentFrame}
+                isFrameTransition={isFrameTransition}
+                transitionProgress={transitionProgress}
                 onTransitionComplete={handleTransitionComplete}
             />
 
             {/* Waitlist Page - appears after circle transition */}
             <WaitlistPage isVisible={showWaitlist} />
         </div>
-    );    
+    );
 }
