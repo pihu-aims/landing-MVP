@@ -53,7 +53,8 @@ export default function TextLayer() {
       height: "h-screen",
       // Alignment variables
       positionPercentTop: 50,
-      positionPercentLeft: 35,
+      positionPercentLeft: 30,
+      maxWidth: 30
     },
     {
       id: "what-we-built",
@@ -70,6 +71,7 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 66.5,
       positionPercentLeft: 70,
+      maxWidth: 30
     },
     {
       id: "who-its-for",
@@ -85,8 +87,9 @@ export default function TextLayer() {
       height: "h-screen",
       // Alignment variables
 
-      positionPercentTop: 40,
-      positionPercentLeft: 30,
+      positionPercentTop: 20,
+      positionPercentLeft: 35,
+      maxWidth: 50
 
     },
     {
@@ -104,6 +107,7 @@ export default function TextLayer() {
       // Alignment variables
       positionPercentTop: 60,
       positionPercentLeft: 70,
+      maxWidth: 30
     },
     {
       id: "get-started",
@@ -187,7 +191,6 @@ export default function TextLayer() {
                 <div
                     className={`max-w-2xl absolute`}
                     style={{
-                      fontSize: `clamp(2rem, 5vw, 6rem)`,
                       top: `${section.positionPercentTop || 0}vh`,        // Vertical center position
                       left: `${section.positionPercentLeft || 0}vw`,      // Horizontal center position
                       transform: `translate(-50%, -50%)          
@@ -199,7 +202,9 @@ export default function TextLayer() {
                       transition: isFrameTransition
                           ? frameTransitionAnimationTrue
                           : frameTranstionAnimationFalse,
-                    }}
+                      maxWidth: `${section.maxWidth || 60}vh`, // 👈 Max width as % of viewport height
+                    }
+                }
                 >
 
                 {index === 0 ? (
@@ -207,7 +212,6 @@ export default function TextLayer() {
                     <h2
                       className={`text-7xl mb-1 ${section.titleColor}`}
                       style={{
-                        fontSize: `clamp(2rem, 5vw, 6rem)`,
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                         fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                         fontWeight: "700"
@@ -220,7 +224,6 @@ export default function TextLayer() {
                   <h2
                     className={`text-5xl font-bold mb-4 ${section.titleColor}`}
                     style={{
-                      fontSize: `clamp(2rem, 5vw, 6rem)`,
                       transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                       fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
                     }}
@@ -232,7 +235,6 @@ export default function TextLayer() {
                     <h3
                       className={`text-6xl mb-6 ${section.subTitleColor}`}
                       style={{
-                        fontSize: `clamp(1.5rem, 3vw, 3.5rem)`,
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                         fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                         fontWeight: "600",
@@ -245,7 +247,6 @@ export default function TextLayer() {
                     <h3
                       className={`text-4xl mb-2 ${section.subTitleColor}`}
                       style={{
-                        fontSize: `clamp(1.5rem, 3vw, 3.5rem)`,
                         transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                         fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
                       }}
@@ -258,7 +259,6 @@ export default function TextLayer() {
                         <p
                             className={`text-2xl whitespace-pre-line ${section.headingColor}`}
                             style={{
-                              fontsize: `clamp(1.25rem, 2.5vw, 2.5rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               marginBottom: "8px",
@@ -270,7 +270,6 @@ export default function TextLayer() {
                         <p
                             className={`text-base mt-1 whitespace-pre-line ${section.descriptionColor}`}
                             style={{
-                              fontSize: `clamp(1rem, 1.8vw, 1.8rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
                             }}
@@ -283,7 +282,6 @@ export default function TextLayer() {
                         <h2
                             className={`text-5xl font-bold mb-2 ${section.titleColor}`}
                             style={{
-                              fontSize: `clamp(2rem, 5vw, 6rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               fontWeight: "700",
@@ -295,7 +293,6 @@ export default function TextLayer() {
                         <h3
                             className={`text-xl mb-4 ${section.subTitleColor}`}
                             style={{
-                              fontSize: `clamp(1.5rem, 3vw, 3.5rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               fontWeight: "600",
@@ -307,7 +304,6 @@ export default function TextLayer() {
                         <p
                             className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
                             style={{
-                              fontSize: `clamp(1rem, 1.8vw, 1.8rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               lineHeight: "1.5"
@@ -321,7 +317,6 @@ export default function TextLayer() {
                         <h2
                             className={`text-5xl font-bold mb-2 ${section.titleColor}`}
                             style={{
-                              fontSize: `clamp(2rem, 5vw, 6rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               fontWeight: "700",
@@ -333,7 +328,6 @@ export default function TextLayer() {
                         <h3
                             className={`text-xl mb-4 ${section.subTitleColor}`}
                             style={{
-                              fontSize: `clamp(1.5rem, 3vw, 3.5rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               fontWeight: "600",
@@ -345,7 +339,6 @@ export default function TextLayer() {
                         <p
                             className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
                             style={{
-                              fontSize: `clamp(1rem, 1.8vw, 1.8rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               lineHeight: "1.5"
@@ -359,7 +352,6 @@ export default function TextLayer() {
                         <h2
                             className={`text-5xl font-bold mb-2 ${section.titleColor}`}
                             style={{
-                              fontSize: `clamp(2rem, 5vw, 6rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               fontWeight: "700",
@@ -371,7 +363,6 @@ export default function TextLayer() {
                         <h3
                             className={`text-xl mb-4 ${section.subTitleColor}`}
                             style={{
-                              fontSize: `clamp(1.5rem, 3vw, 3.5rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               fontWeight: "600",
@@ -383,7 +374,6 @@ export default function TextLayer() {
                         <p
                             className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
                             style={{
-                              fontSize: `clamp(1rem, 1.8vw, 1.8rem)`,
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
                               lineHeight: "1.5"
@@ -396,7 +386,6 @@ export default function TextLayer() {
                       <p
                           className={`text-xl whitespace-pre-line ${section.descriptionColor}`}
                           style={{
-                            fontSize: `clamp(1rem, 1.8vw, 1.8rem)`,
                             transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                             fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em"
                           }}
