@@ -25,7 +25,7 @@ export default function TopBar() {
     {/*Made the header background black at 50% transparency*/}
     return (
     <header className="topbar fixed top-0 left-0
-      w-full flex justify-between items-center px-8 py-4 z-50 bg-black/50
+      w-full flex justify-between items-center px-8 py-4 z-50
       pointer-events-auto">
 
         {/* Logo */}

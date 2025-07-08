@@ -39,7 +39,9 @@ export default function TextLayer() {
     {
       id: "studio1",
       title: "Studio1",
-      subtitle: "Lets Create",
+
+      subtitle: "Let's Create",
+
       heading: "Our Vision: Empowering the Next Billion Storytellers",
       description:
           "Anyone can become a creator. By simplifying powerful AI tools, we give people the freedom to tell stories quickly, confidently, and with full control.",
@@ -66,9 +68,8 @@ export default function TextLayer() {
       descriptionColor: "text-white",
       height: "h-screen",
       // Alignment variables
-      positionPercentTop: 65,
+      positionPercentTop: 66.5,
       positionPercentLeft: 70,
-
     },
     {
       id: "who-its-for",
@@ -83,15 +84,17 @@ export default function TextLayer() {
       descriptionColor: "text-white",
       height: "h-screen",
       // Alignment variables
+
       positionPercentTop: 40,
       positionPercentLeft: 30,
+
     },
     {
       id: "who-we-are",
       title: "Who We Are",
       subtitle: "Creative Vision Meets Technical Firepower",
       description:
-          "We're a team of BAFTA-winning creators, AI experts, and proven operators.\nWe know how to build, ship and scale creative tech.",
+          "We're a team of BAFTA-winning creators, AI experts and proven operators.\nWe know how to build, ship and scale creative tech.",
       bgColor: "bg-transparent",
       titleColor: "text-black",
       subTitleColor: "text-black",
@@ -99,7 +102,7 @@ export default function TextLayer() {
       descriptionColor: "text-black",
       height: "h-screen",
       // Alignment variables
-      positionPercentTop: 30,
+      positionPercentTop: 60,
       positionPercentLeft: 70,
     },
     {
@@ -207,7 +210,7 @@ export default function TextLayer() {
                       {section.title}
                     </h2>
                   </>
-                ) : (
+                ) : (index !== 1 && index !== 2 && index !== 3) ? (
                   <h2
                     className={`text-5xl font-bold mb-4 ${section.titleColor}`}
                     style={{
@@ -217,7 +220,7 @@ export default function TextLayer() {
                   >
                     {section.title}
                   </h2>
-                )}
+                ) : null}
                   {index === 0 ? (
                     <h3
                       className={`text-6xl mb-6 ${section.subTitleColor}`}
@@ -230,7 +233,7 @@ export default function TextLayer() {
                     >
                       {section.subtitle}
                     </h3>
-                  ) : (
+                  ) : (index !== 1 && index !== 2 && index !== 3) ? (
                     <h3
                       className={`text-4xl mb-2 ${section.subTitleColor}`}
                       style={{
@@ -240,7 +243,7 @@ export default function TextLayer() {
                     >
                       {section.subtitle}
                     </h3>
-                  )}
+                  ) : null}
                   {index === 0 ? (
                       <>
                         <p
@@ -264,6 +267,111 @@ export default function TextLayer() {
                           {section.description}
                         </p>
                       </>
+                  ) : index === 1 ? (
+                      <div>
+                        <h2
+                            className={`text-5xl font-bold mb-2 ${section.titleColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              fontWeight: "700",
+                              marginBottom: "24px"
+                            }}
+                        >
+                          {section.title}
+                        </h2>
+                        <h3
+                            className={`text-xl mb-4 ${section.subTitleColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              fontWeight: "600",
+                              marginBottom: "12px"
+                            }}
+                        >
+                          {section.subtitle}
+                        </h3>
+                        <p
+                            className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              lineHeight: "1.5"
+                            }}
+                        >
+                          {section.description}
+                        </p>
+                      </div>
+                  ) : index === 2 ? (
+                      <div>
+                        <h2
+                            className={`text-5xl font-bold mb-2 ${section.titleColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              fontWeight: "700",
+                              marginBottom: "24px"
+                            }}
+                        >
+                          {section.title}
+                        </h2>
+                        <h3
+                            className={`text-xl mb-4 ${section.subTitleColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              fontWeight: "600",
+                              marginBottom: "12px"
+                            }}
+                        >
+                          {section.subtitle}
+                        </h3>
+                        <p
+                            className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              lineHeight: "1.5"
+                            }}
+                        >
+                          {section.description}
+                        </p>
+                      </div>
+                  ) : index === 3 ? (
+                      <div>
+                        <h2
+                            className={`text-5xl font-bold mb-2 ${section.titleColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              fontWeight: "700",
+                              marginBottom: "24px"
+                            }}
+                        >
+                          {section.title}
+                        </h2>
+                        <h3
+                            className={`text-xl mb-4 ${section.subTitleColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              fontWeight: "600",
+                              marginBottom: "12px"
+                            }}
+                        >
+                          {section.subtitle}
+                        </h3>
+                        <p
+                            className={`text-sm whitespace-pre-line ${section.descriptionColor}`}
+                            style={{
+                              transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
+                              fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
+                              lineHeight: "1.5"
+                            }}
+                        >
+                          {section.description}
+                        </p>
+                      </div>
                   ) : (
                       <p
                           className={`text-xl whitespace-pre-line ${section.descriptionColor}`}
