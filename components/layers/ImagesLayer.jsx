@@ -5,116 +5,64 @@ import useFrameScrollAnimation from "../../hooks/useFrameScrollAnimation";
 
 export default function ImagesLayer() {
   const [isClient, setIsClient] = useState(false);
-  const { currentFrame, isFrameTransition } = useFrameScrollAnimation();
-  const [scaleMultiplier, setScaleMultiplier] = useState(1); // Scaling of iamges
-
-  useEffect(() => {
-    const handleResize = () => {
-      const baselineWidth = 1920; // Fullscreen baseline
-      const currentWidth = window.innerWidth;
-
-      // Scale proportionally
-      const multiplier = currentWidth / baselineWidth;
-      setScaleMultiplier(multiplier);
-    };
-
-    handleResize(); // Run once on mount
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Animation settings
-  const frameTransitionAnimationTrue = 'all 0.5s ease-out';
-  const frameTransitionAnimationFalse = 'all 0.2s linear';
-
-  // Array of images with their position/scale
-  const contentImages = [
-    {
-      id: "image-a",
-      src: "/images/a.png",
-      alt: "Image A - Our Vision",
-      positionPercentTop: 50,  //down from viewport top
-      positionPercentLeft: 70, //from left edge
-      scale: 1.2, // The scale is the scale from the image resolution (in terms of pixels)
-      width: 400,              // px (optional)
-      frame: 1, // which frame it appears on
-    },
-    {
-      id: "image-b",
-      src: "/images/b.png",
-      alt: "Image B - What We've Built",
-      positionPercentTop: 50,
-      positionPercentLeft: 25,
-      scale: 2,
-      width: 400,
-      frame: 2,
-    },
-    {
-      id: "image-c",
-      src: "/images/c.png",
-      alt: "Image C - Who It's For",
-      positionPercentTop: 25,
-      positionPercentLeft: 80,
-      scale: 1.35,
-      width: 350,
-      frame: 3,
-    },
-    {
-      id: "image-d",
-      src: "/images/d.png",
-      alt: "Image D - Who We Are",
-      positionPercentTop: 75,
-      positionPercentLeft: 20,
-      scale: 1.35,
-      width: 380,
-      frame: 3,
-    },
-    {
-      id: "image-e",
-      src: "/images/e.png",
-      alt: "Image E - Additional Content",
-      positionPercentTop: 50,
-      positionPercentLeft: 35,
-      scale: 1.25,
-      width: 450,
-      frame: 4,
-    },
-  ];
-
-  // Set isClient on mount
+  const { scrollY } = useFrameScrollAnimation();
+  
+  // Set isClient to true when component mounts to avoid hydration errors
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   if (!isClient) return null;
-
+  
+  // Common style for all images - no fading
+  const imageStyle = {
+    opacity: 1
+  };
+  
   return (
-      <div className="fixed top-0 left-0 w-full h-full z-25 pointer-events-none">
-        {contentImages.map((image, index) => (
-            <img
-                key={image.id}
-                src={image.src}
-                alt={image.alt}
-                className="absolute object-cover rounded-3xl shadow-lg"
-                style={{
-                  top: `${((image.frame - 1) * 100) + image.positionPercentTop}vh`,   // Center vertically
-                  // Also accounts for frame as well and frame index starts at 1
-                  left: `${image.positionPercentLeft}vw`, // Center horizontally
-                  width: `${image.width}px`,
-                  height: 'auto',
-                  transform: `
-              translate(-50%, -50%)             /* Center the image */
-              scale(${image.scale * (scaleMultiplier * 0.80) || 1})        /* Scale the image */
-              ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
-            `,
-                  opacity: currentFrame === (image.frame-1) ? 1 : 0,
-                  transition: isFrameTransition
-                      ? frameTransitionAnimationTrue
-                      : frameTransitionAnimationFalse,
-                }}
-            />
-        ))}
-      </div>
+    <div 
+      className="fixed top-0 left-0 w-full h-full z-25 pointer-events-none"
+      style={{ opacity: 1 }}
+    >
+      {/* Image A - First section */}
+      <img 
+        src="/images/a.png"
+        alt="Image A - Our Vision"
+        className="absolute w-[400px] h-auto top-[20vh] right-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
+      />
+      
+      {/* Image B - Second section */}
+      <img 
+        src="/images/b.png"
+        alt="Image B - What We've Built"
+        className="absolute w-[400px] h-auto top-[120vh] left-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
+      />
+      
+      {/* Image C - Third section */}
+      <img 
+        src="/images/c.png"
+        alt="Image C - Who It's For"
+        className="absolute w-[350px] h-auto top-[220vh] right-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
+      />
+      
+      {/* Image D - Fourth section */}
+      <img 
+        src="/images/d.png"
+        alt="Image D - Who We Are"
+        className="absolute w-[380px] h-auto top-[320vh] left-[10vw] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
+      />
+      
+      {/* Image E - Fifth section */}
+      <img 
+        src="/images/e.png"
+        alt="Image E - Additional Content"
+        className="absolute w-[450px] h-auto top-[420vh] left-[calc(50%-225px)] object-cover rounded-3xl shadow-lg"
+        style={imageStyle}
+      />
+    </div>
   );
 }
