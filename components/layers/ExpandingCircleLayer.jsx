@@ -21,7 +21,8 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
         }
     }
 
-    const offset = 3.6
+    const offsetLeft = 4.25
+    const offsetTop = 0.5
 
     return (
         <>
@@ -32,8 +33,8 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
                     width: '8px',
                     height: '8px',
                     transformOrigin: 'center center',
-                    top: '50%',
-                    left:`calc(50% + ${offset}rem)`, // 👈 Adjust this offset to match the "o" position
+                    top: `calc(50% + ${offsetTop}rem)`,
+                    left:`calc(50% + ${offsetLeft}rem)`, // 👈 Adjust this offset to match the "o" position
                     transform: `translate(-50%, -50%) scale(${scale})`,
                     transition: 'transform 0.5s ease-linear',
                     opacity: 1,
@@ -47,16 +48,34 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
                     style={{ opacity: 1 }}
                 >
                     {/* Outer white text */}
-                    <h1 className="text-8xl font-bold text-white">Let The Story Begin</h1>
+                    <h1
+                        className="font-bold text-white"
+                        style={{
+                            fontSize: "7.21rem", // 👈 Custom font size
+                            lineHeight: "1.1",
+                            letterSpacing: "-0.02em",
+                        }}
+                    >
+                        Let The Story Begin
+                    </h1>
 
                     {/* Inner black text clipped by circle */}
                     <div
                         className="absolute top-0 left-0 w-full h-full"
                         style={{
-                            clipPath: `circle(${scale * 4}px at calc(50% + ${offset}rem) 50%)`, // 👈 Same offset for clipPath
+                            clipPath: `circle(${scale * 4}px at calc(50% + ${offsetLeft}rem) 50%)`,
                         }}
                     >
-                        <h1 className="text-8xl font-bold text-black">Let The Story Begin</h1>
+                        <h1
+                            className="font-bold text-black"
+                            style={{
+                                fontSize: "7.21rem", // 👈 Same custom font size
+                                lineHeight: "1.1",
+                                letterSpacing: "-0.02em",
+                            }}
+                        >
+                            Let The Story Begin
+                        </h1>
                     </div>
                 </div>
             )}
