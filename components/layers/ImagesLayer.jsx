@@ -81,6 +81,7 @@ export default function ImagesLayer() {
     //   width: 475,              // px (optional)
     //   frame: 1, // which frame it appears on
     // },
+
     // Image B converted to video
     // {
     //   id: "image-b",
@@ -92,6 +93,7 @@ export default function ImagesLayer() {
     //   width: 480,
     //   frame: 2,
     // },
+
     /*
     {
       id: "image-c",

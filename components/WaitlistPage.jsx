@@ -49,6 +49,15 @@ const WaitlistPage = ({ isVisible }) => {
 
     setIsLoading(false);
   };
+  const videoPositionPercentTop = 32;  // % down from viewport top
+  const videoPositionPercentLeft = 50; // % from viewport left (centered)
+  const headingPositionPercentTop = 65;  // % down from viewport top
+  const headingPositionPercentLeft = 50; // % from viewport left (centered)
+  const descriptionPositionPercentTop = 70;  // % down from viewport top
+  const descriptionPositionPercentLeft = 50; // % from viewport left (centered)
+  const formPositionPercentTop = 75;  // % down from viewport top
+  const formPositionPercentLeft = 50; // % from viewport left (centered)
+  const videoScale = 1.1;
 
   // Base animation style for fade-in
   const fadeIn = {
@@ -61,33 +70,36 @@ const WaitlistPage = ({ isVisible }) => {
   const animatedVideo = {
     ...fadeIn,
     opacity: animationStarted ? 1 : 0,
-    transform: animationStarted ? 'translateY(0)' : 'translateY(10px)',
+    transform: animationStarted ? `translate(-50%, -50%) scale(${videoScale})` : 'translateY(10px)',
     transitionDelay: '0.1s'
   };
   
   const animatedHeading = {
     ...fadeIn,
     opacity: animationStarted ? 1 : 0,
-    transform: animationStarted ? 'translateY(0)' : 'translateY(10px)',
+    transform: animationStarted ? 'translate(-50%, -50%) scale(1)' : 'translateY(10px)',
     transitionDelay: '0.25s'
   };
   
   const animatedDescription = {
     ...fadeIn,
     opacity: animationStarted ? 1 : 0,
-    transform: animationStarted ? 'translateY(0)' : 'translateY(10px)',
+    transform: animationStarted ? 'translate(-50%, -50%) scale(1)' : 'translateY(10px)',
     transitionDelay: '0.4s'
   };
   
   const animatedForm = {
     ...fadeIn,
     opacity: animationStarted ? 1 : 0,
-    transform: animationStarted ? 'translateY(0)' : 'translateY(10px)',
+    transform: animationStarted ? 'translate(-50%, -50%) scale(1)' : 'translateY(10px)',
     transitionDelay: '0.55s'
   };
 
+         // Optional scale multiplier
+
+
   return (
-    <div 
+    <div
       className={`fixed inset-0 bg-white z-60 flex flex-col items-center justify-center overflow-auto ${
         isVisible ? '' : 'pointer-events-none'
       }`}
@@ -98,32 +110,61 @@ const WaitlistPage = ({ isVisible }) => {
       }}
     >
       <div className="max-w-3xl w-full flex flex-col items-center px-4">
-        {/* Video - larger size as requested */}
-        <div className="w-full max-w-2xl aspect-video mb-8 rounded-lg overflow-hidden border border-gray-200" style={animatedVideo}>
-          <video 
-            className="w-full h-full object-cover"
-            controls
-            autoPlay
-            muted
-            loop
-            playsInline
+        {/* Video - larger size & movable */}
+        <div
+            className="relative w-full aspect-video mb-8 rounded-lg overflow-hidden border border-gray-200 shadow-lg"
+            style={{
+              position: 'absolute',               // 👈 allow independent positioning
+              top: `${videoPositionPercentTop}vh`,                        // 👈 move down 30% of viewport height
+              left: `${videoPositionPercentLeft}vw`,                       // 👈 center horizontally at 50% viewport width
+              width: '70vw',                      // 👈 make video 70% of viewport width
+              maxWidth: '1200px',                 // 👈 optional max size
+              transition: 'all 0.6s ease-out',     // 👈 smooth movement
+              ...animatedVideo                    // 👈 apply your animation fade
+            }}
+        >
+          <video
+              className="w-full h-full object-cover"
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
           >
-           <source src="/videos/cl.mp4" type="video/mp4" />
+            <source src="/videos/cl.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         
         {/* Heading - positioned as in the image */}
-        <h1 className="text-3xl font-bold text-center mb-4" style={animatedHeading}>Join Our Creative AI Revolution</h1>
+        <h1 className="text-3xl font-bold text-center mb-4"
+            style={{
+              position: 'absolute',               // 👈 allow independent positioning
+              top: `${headingPositionPercentTop}vh`,                        // 👈 move down 30% of viewport height
+              left: `${headingPositionPercentLeft}vw`,                       // 👈 center horizontally at 50% viewport width
+
+              ...animatedHeading}}
+        >Join the Creative AI Revolution</h1>
         
         {/* Description - smaller width as in the image */}
-        <p className="text-md text-center mb-8 max-w-lg" style={animatedDescription}>
+        <p className="text-md text-center mb-8 max-w-lg" style={{
+          position: 'absolute',               // 👈 allow independent positioning
+          top: `${descriptionPositionPercentTop}vh`,                        // 👈 move down 30% of viewport height
+          left: `${descriptionPositionPercentLeft}vw`,                       // 👈 center horizontally at 50% viewport width
+          maxWidth: "90vh",
+          ...animatedDescription}}>
           We're raising SEIS and EIS pre-seed investment. With clear demand, standout tech, and a top-tier team, 
           Studio 1 is building the future of creative AI. Join us and help shape a safe, ethical, creator-first world.
         </p>
         
         {/* !! hello Email Form - styled to match the image with horizontal layout */}
-        <div className="w-full flex justify-center" style={animatedForm}>
+        <div className="w-full flex justify-center"
+             style={{
+          position: 'absolute',               // 👈 allow independent positioning
+          top: `${formPositionPercentTop}vh`,                        // 👈 move down 30% of viewport height
+          left: `${formPositionPercentLeft}vw`,                       // 👈 center horizontally at 50% viewport width
+
+          ...animatedForm}}>
           {!isSuccess ? (
             <form onSubmit={handleSubmit} className="flex items-center w-full max-w-md gap-2">
               <input
