@@ -30,11 +30,13 @@ this project as a whole.
 
 ## 1. First time setup
 
+
 1. Clone repository using SSH
 
 ```bash
 git git@github.com:pihu-aims/landing-MVP.git
 cd landing-MVP
+npm install
 ```
 
 2. Configure your name and email (if you haven't already):
@@ -66,7 +68,7 @@ TODO: Implement branch protection on this repo
 > Update gitignore every time something new needs to be ignored
 
 ```
-aaims-websiteMVP/ 
+aaims-landing-MVP/ 
 ├── docs/                     // General Documentation
 │   └── Setup.md              // How to set up specific software
 ├── .gitignore                // Gitignore
@@ -74,20 +76,6 @@ aaims-websiteMVP/
 
 ```
 
-```
-InvestorWebsite/
-├── public/         # Static assets
-├── src/
-│   ├── assets/     # Images and other assets
-│   ├── components/ # React components
-│   ├── App.jsx     # Root component
-│   └── main.jsx    # Entry point
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-
-```
 
 ### 4. Daily workflow
 
