@@ -131,7 +131,7 @@ const WaitlistPage = ({ isVisible }) => {
               loop
               playsInline
           >
-            <source src="/videos/cl.mp4" type="video/mp4" />
+            <source src="/videos/demoVideoUpdate.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
