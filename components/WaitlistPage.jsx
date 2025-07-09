@@ -114,7 +114,7 @@ const WaitlistPage = ({ isVisible }) => {
         </div>
         
         {/* Heading - positioned as in the image */}
-        <h1 className="text-3xl font-bold text-center mb-4" style={animatedHeading}>Join the Creative AI Revolution</h1>
+        <h1 className="text-3xl font-bold text-center mb-4" style={animatedHeading}>Join Our Creative AI Revolution</h1>
         
         {/* Description - smaller width as in the image */}
         <p className="text-md text-center mb-8 max-w-lg" style={animatedDescription}>
@@ -122,7 +122,7 @@ const WaitlistPage = ({ isVisible }) => {
           Studio 1 is building the future of creative AI. Join us and help shape a safe, ethical, creator-first world.
         </p>
         
-        {/* Email Form - styled to match the image with horizontal layout */}
+        {/* !! hello Email Form - styled to match the image with horizontal layout */}
         <div className="w-full flex justify-center" style={animatedForm}>
           {!isSuccess ? (
             <form onSubmit={handleSubmit} className="flex items-center w-full max-w-md gap-2">
@@ -134,6 +134,7 @@ const WaitlistPage = ({ isVisible }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
               />
+              
               <button 
                 type="submit" 
                 className="bg-black text-white whitespace-nowrap px-6 py-2 rounded-lg font-medium disabled:opacity-50"
