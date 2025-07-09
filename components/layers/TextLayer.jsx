@@ -71,8 +71,8 @@ export default function TextLayer() {
       descriptionColor: "text-white",
       height: "h-screen",
       // Alignment variables
-      positionPercentTop: 63,
-      positionPercentLeft: 65,
+      positionPercentTop: 56,
+      positionPercentLeft: 70,
       maxWidth: 65,
       prefWidth: 65,
       minWidth: 65,
@@ -327,7 +327,7 @@ export default function TextLayer() {
                   ) : index === 1 ? (
                       <div>
                         <h2
-                            className={`text-7xl font-bold mb-2 ${section.titleColor}`}
+                            className={`text-8xl font-bold mb-2 ${section.titleColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
@@ -338,7 +338,7 @@ export default function TextLayer() {
                           {section.title}
                         </h2>
                         <h3
-                            className={`text-3xl mb-4 ${section.subTitleColor}`}
+                            className={`text-4xl mb-4 ${section.subTitleColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
@@ -349,7 +349,7 @@ export default function TextLayer() {
                           {section.subtitle}
                         </h3>
                         <p
-                            className={`text-base whitespace-pre-line ${section.descriptionColor}`}
+                            className={`text-xl whitespace-pre-line ${section.descriptionColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",
