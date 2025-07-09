@@ -50,6 +50,7 @@ export default function ImagesLayer() {
       width: 480,
       frame: 2,
     },
+    /*
     {
       id: "image-c",
       src: "/images/c.png",
@@ -61,6 +62,7 @@ export default function ImagesLayer() {
       width: 380,
       frame: 3,
     },
+    */
     {
       id: "image-d",
       src: "/images/d.png",
