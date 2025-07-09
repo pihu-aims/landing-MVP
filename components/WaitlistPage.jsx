@@ -49,6 +49,15 @@ const WaitlistPage = ({ isVisible }) => {
 
     setIsLoading(false);
   };
+  const videoPositionPercentTop = 32;  // % down from viewport top
+  const videoPositionPercentLeft = 50; // % from viewport left (centered)
+  const headingPositionPercentTop = 65;  // % down from viewport top
+  const headingPositionPercentLeft = 50; // % from viewport left (centered)
+  const descriptionPositionPercentTop = 70;  // % down from viewport top
+  const descriptionPositionPercentLeft = 50; // % from viewport left (centered)
+  const formPositionPercentTop = 75;  // % down from viewport top
+  const formPositionPercentLeft = 50; // % from viewport left (centered)
+  const videoScale = 1.1;
 
   // Base animation style for fade-in
   const fadeIn = {
@@ -61,7 +70,7 @@ const WaitlistPage = ({ isVisible }) => {
   const animatedVideo = {
     ...fadeIn,
     opacity: animationStarted ? 1 : 0,
-    transform: animationStarted ? 'translate(-50%, -50%) scale(1)' : 'translateY(10px)',
+    transform: animationStarted ? `translate(-50%, -50%) scale(${videoScale})` : 'translateY(10px)',
     transitionDelay: '0.1s'
   };
   
@@ -86,15 +95,7 @@ const WaitlistPage = ({ isVisible }) => {
     transitionDelay: '0.55s'
   };
 
-  const videoPositionPercentTop = 30;  // % down from viewport top
-  const videoPositionPercentLeft = 50; // % from viewport left (centered)
-  const headingPositionPercentTop = 61.5;  // % down from viewport top
-  const headingPositionPercentLeft = 50; // % from viewport left (centered)
-  const descriptionPositionPercentTop = 65;  // % down from viewport top
-  const descriptionPositionPercentLeft = 50; // % from viewport left (centered)
-  const formPositionPercentTop = 70;  // % down from viewport top
-  const formPositionPercentLeft = 50; // % from viewport left (centered)
-  const videoScale = 1.25;              // Optional scale multiplier
+         // Optional scale multiplier
 
 
   return (
