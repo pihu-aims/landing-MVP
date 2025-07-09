@@ -28,18 +28,34 @@ export default function ImagesLayer() {
   const frameTransitionAnimationTrue = 'all 0.5s ease-out';
   const frameTransitionAnimationFalse = 'all 0.2s linear';
 
-  // Array of images with their position/scale
-  const contentImages = [
+  const contentVideos = [
     {
-      id: "image-a",
-      src: "/images/a.png",
-      alt: "Image A - Our Vision",
+      id: "video-a",
+      src: "/videos/a.mp4",
+      alt: "Video A: Our Vision",
       positionPercentTop: 50,  //down from viewport top
       positionPercentLeft: 70, //from left edge
       scale: 1.9, // The scale is the scale from the image resolution (in terms of pixels)
       width: 475,              // px (optional)
       frame: 1, // which frame it appears on
+
+      borderRadius: `44px`,
+      border: `3px solid white`,
+
     },
+  ]
+  // Array of images with their position/scale
+  const contentImages = [
+    // {
+    //   id: "image-a",
+    //   src: "/images/a.png",
+    //   alt: "Image A - Our Vision",
+    //   positionPercentTop: 50,  //down from viewport top
+    //   positionPercentLeft: 70, //from left edge
+    //   scale: 1.9, // The scale is the scale from the image resolution (in terms of pixels)
+    //   width: 475,              // px (optional)
+    //   frame: 1, // which frame it appears on
+    // },
     {
       id: "image-b",
       src: "/images/b.png",
@@ -93,7 +109,44 @@ export default function ImagesLayer() {
   if (!isClient) return null;
 
   return (
+
+      // Images content
       <div className="fixed top-0 left-0 w-full h-full z-25 pointer-events-none">
+
+        {/* Render Videos */}
+        {contentVideos.map((video, index) => (
+            <video
+                key={video.id}
+                src={video.src}
+                className="absolute rounded-3xl shadow-lg"
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{
+                  top: `${((video.frame - 1) * 100) + video.positionPercentTop}vh`,   // Center vertically
+                  // Also accounts for frame as well and frame index starts at 1
+                  left: `${video.positionPercentLeft}vw`, // Center horizontally
+                  width: `${video.width}px`,
+                  height: 'auto',
+                  transform: `
+              translate(-50%, -50%)             /* Center the image */
+              scale(${video.scale * (scaleMultiplier * 0.80) || 1})        /* Scale the image */
+              ${isFrameTransition && currentFrame === index ? 'translateY(5px)' : ''}
+            `,
+                  opacity: 1,
+                  //opacity: currentFrame === (image.frame-1) ? 1 : 0.5,
+                  transition: isFrameTransition
+                      ? frameTransitionAnimationTrue
+                      : frameTransitionAnimationFalse,
+
+                  // Optional fields with a default empty
+                  borderRadius: video.borderRadius ?? ``,
+                  border: video.border ?? ``,
+                }}
+            />
+        ))}
+
         {contentImages.map((image, index) => (
             <img
                 key={image.id}
