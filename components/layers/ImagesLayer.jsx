@@ -41,7 +41,32 @@ export default function ImagesLayer() {
 
       borderRadius: `44px`,
       border: `3px solid white`,
-
+    },
+    {
+      id: "video-b",
+      src: "/videos/b.mp4", // Assuming you'll provide a video file named b.mp4
+      alt: "Video B: What We've Built",
+      positionPercentTop: 42.5,
+      positionPercentLeft: 30,
+      scale: 1.75,
+      width: 480,
+      frame: 2,
+      
+      borderRadius: `44px`,
+      border: `3px solid white`,
+    },
+    {
+      id: "video-d",
+      src: "/videos/c.mp4", // Changed to c.mp4 video file
+      alt: "Video D: Who We Are",
+      positionPercentTop: 70,
+      positionPercentLeft: 17,
+      scale: 1.5,
+      width: 410,
+      frame: 3,
+      
+      borderRadius: `44px`,
+      border: `3px solid white`,
     },
   ]
   // Array of images with their position/scale
@@ -56,16 +81,17 @@ export default function ImagesLayer() {
     //   width: 475,              // px (optional)
     //   frame: 1, // which frame it appears on
     // },
-    {
-      id: "image-b",
-      src: "/images/b.png",
-      alt: "Image B - What We've Built",
-      positionPercentTop: 42.5,
-      positionPercentLeft: 30,
-      scale: 1.75,
-      width: 480,
-      frame: 2,
-    },
+    // Image B converted to video
+    // {
+    //   id: "image-b",
+    //   src: "/images/b.png",
+    //   alt: "Image B - What We've Built",
+    //   positionPercentTop: 42.5,
+    //   positionPercentLeft: 30,
+    //   scale: 1.75,
+    //   width: 480,
+    //   frame: 2,
+    // },
     /*
     {
       id: "image-c",
@@ -79,16 +105,17 @@ export default function ImagesLayer() {
       frame: 3,
     },
     */
-    {
-      id: "image-d",
-      src: "/images/d.png",
-      alt: "Image D - Who We Are",
-      positionPercentTop: 70,
-      positionPercentLeft: 17,
-      scale: 1.5,
-      width: 410,
-      frame: 3,
-    },
+    // Image D converted to video
+    // {
+    //   id: "image-d",
+    //   src: "/images/d.png",
+    //   alt: "Image D - Who We Are",
+    //   positionPercentTop: 70,
+    //   positionPercentLeft: 17,
+    //   scale: 1.5,
+    //   width: 410,
+    //   frame: 3,
+    // },
     {
       id: "image-e",
       src: "/images/e.png",
