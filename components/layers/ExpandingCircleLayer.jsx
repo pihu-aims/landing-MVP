@@ -4,9 +4,12 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
     const isActive = currentFrame >= 4 && currentFrame <= 6;
 
     let scale = 0;
+    // Calculate text opacity based on transition progress
+    let textOpacity = 1;
 
     useEffect(() => {
-        if (isActive && transitionProgress > 0.6) {
+        // Trigger completion earlier (0.5 instead of 0.6) for faster transition
+        if (isActive && transitionProgress > 0.5) {
             onTransitionComplete && onTransitionComplete(true);
         } else if (!isActive) {
             onTransitionComplete && onTransitionComplete(false);
@@ -14,10 +17,20 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
     }, [isActive, transitionProgress, onTransitionComplete]);
 
     if (isActive) {
-        if (transitionProgress <= 0.5) {
-            scale = transitionProgress * 2 * 500;
+        if (transitionProgress <= 0.4) { // Speed up scale transition by completing at 0.4 instead of 0.5
+            scale = transitionProgress * 2.5 * 500; // Faster scaling (2.5x instead of 2x)
         } else {
             scale = 500;
+        }
+        
+        // Calculate text opacity - fade out text as circle expands
+        if (transitionProgress <= 0.3) {
+            textOpacity = 1; // Text fully visible initially
+        } else if (transitionProgress > 0.3 && transitionProgress < 0.7) {
+            // Linear fade out between 0.3 and 0.7 progress points
+            textOpacity = 1 - ((transitionProgress - 0.3) / 0.4);
+        } else {
+            textOpacity = 0; // Text fully invisible after 0.7 progress
         }
     }
 
@@ -36,7 +49,7 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
                     top: `calc(50% + ${offsetTop}rem)`,
                     left:`calc(50% + ${offsetLeft}rem)`, // 👈 Adjust this offset to match the "o" position
                     transform: `translate(-50%, -50%) scale(${scale})`,
-                    transition: 'transform 0.5s ease-linear',
+                    transition: 'transform 0.35s ease-out', // Faster transition with ease-out for smoother feel
                     opacity: 1,
                 }}
             ></div>
@@ -45,7 +58,10 @@ const ExpandingCircleLayer = ({ currentFrame, isFrameTransition, transitionProgr
             {isActive && (
                 <div
                     className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-60 text-center"
-                    style={{ opacity: 1 }}
+                    style={{ 
+                        opacity: textOpacity,
+                        transition: 'opacity 0.4s ease-out' // Add transition for smooth opacity changes
+                    }}
                 >
                     {/* Outer white text */}
                     <h1
