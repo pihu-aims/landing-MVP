@@ -38,7 +38,7 @@ export default function TextLayer() {
   const contentSections = [
     {
       id: "studio1",
-      title: "Studio1",
+      title: "Studio 1",
 
       subtitle: "Create Together",
 
@@ -304,7 +304,7 @@ export default function TextLayer() {
                   {index === 0 ? (
                       <>
                         <p
-                            className={`text-3xl whitespace-pre-line ${section.headingColor}`}
+                            className={`text-3xl whitespace-nowrap ${section.headingColor}`}
                             style={{
                               transition: isFrameTransition ? frameTransitionAnimationTrue : frameTranstionAnimationFalse,
                               fontFamily: "var(--font-apparat), system-ui, sans-serif", letterSpacing: "-0.01em",

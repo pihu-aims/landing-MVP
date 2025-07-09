@@ -1,9 +1,35 @@
-import { Inter, Manrope } from 'next/font/google'
+import localFont from 'next/font/local'
+import { Manrope } from 'next/font/google'
 
-// Use Inter as a replacement for Apparat - it has a similar clean, modern look
-export const apparatFont = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+// Use actual Apparat font
+export const apparatFont = localFont({
+  src: [
+    {
+      path: '../public/fonts/apparat/Apparat-Light.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/apparat/Apparat-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/apparat/Apparat-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/apparat/Apparat-Semibold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/apparat/Apparat-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    }
+  ],
   variable: '--font-apparat',
   display: 'swap',
 })
