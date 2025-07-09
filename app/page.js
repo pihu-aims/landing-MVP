@@ -74,7 +74,7 @@ export default function Home() {
                 style={{
                     transform: `translateY(-${textOffset}vh)`, // moves by frame only
 
-                    transition: isFrameTransition ? 'transform 0.8s ease-out 0.4s' : 'none',
+                    transition: isFrameTransition ? 'transform 1.2s cubic-bezier(0.1, 0.8, 0.9, 1)' : 'none',
                     opacity: 1 // Ensure images are always fully visible
 
                 }}
